@@ -48,7 +48,7 @@ do
 			;;
 		*)
 			pat=${1%/}
-			if ! grep -x $pat <<EOF >/dev/null 2>&1
+			if ! grep -q -x $pat <<EOF 2>/dev/null
 $fontdirs
 EOF
 			then
