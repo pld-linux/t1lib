@@ -1,18 +1,23 @@
 Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts.
 Name:		t1lib
-Version:	0.9
+Version:	0.9.2
 Release:	1
 Group:		Libraries
 Group(pl):	Biblioteki
-Copyright:	GPL
-Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
-URL:		http://www.windowmaker.org/
+License:	LGPL
+Source:		ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
 Patch0:		t1lib-DESTDIR.patch
 Patch1:		t1lib-doc.patch
+Patch2:		t1lib-datadir.patch
+Patch3:		t1lib-config.patch
+URL:		http://www.windowmaker.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	tetex
 BuildRequires:	tetex-latex
+BuildRequires:	type1inst >= 0.6.1
 BuildRoot:	/tmp/%{name}-%{version}-root
+
+%define		_fontdir	/usr/share/fonts
 
 %description
 t1lib is a library distributed under the GNU General Public Library License
@@ -44,6 +49,20 @@ X11 have been eliminated. Here are some of the features:
   distribution. This program allows to test all of the features of the
   library. It requires X11.
 
+%package fonts
+Summary:	Type 1 fonts
+Summary(pl):	Fonty Type 1
+Group:		X11/Fonts
+Group(pl):	X11/Fonty
+Requires:	%{name} = %{version}
+Requires:	type1inst >= 0.6.1
+
+%description fonts
+Type 1 fonts.
+
+%description fonts -l pl
+Zestaw fontów Type 1.
+
 %package devel
 Summary:	Development files for t1lib
 Summary(pl):	Pliki nag³ówkowe i biblioteki dla t1lib
@@ -71,51 +90,70 @@ Static libraries for t1lib.
 Biblioteki statyczne dla t1lib.
 
 %prep
-%setup -n T1-%{version}
+%setup -q -n T1-%{version}
 %patch0 -p0
 %patch1 -p0
+%patch2 -p0
+%patch3 -p0
 
 %build
-CFLAGS=$RPM_OPT_FLAGS \
+autoconf
+LDFLAGS="-s"; export LDFLAGS
 %configure
 
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_datadir},%{_bindir},%{_includedir}}
+install -d $RPM_BUILD_ROOT{%{_libdir},%{_datadir},%{_bindir},%{_includedir}} \
+	$RPM_BUILD_ROOT%{_fontdir}/Type1/afm
 
 make install DESTDIR=$RPM_BUILD_ROOT
 
-cp -fr Fonts/* $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}
+cp -a Fonts/afm/*.afm	$RPM_BUILD_ROOT%{_fontdir}/Type1/afm
+cp -a Fonts/type1/*.pfb	$RPM_BUILD_ROOT%{_fontdir}/Type1
+cp -a Fonts/enc		$RPM_BUILD_ROOT%{_datadir}/%{name}
 
-#CFLAGS=$RPM_OPT_FLAGS ./configure --prefix=/usr --with-static-lib
-#make
+gzip -9nf Changes README.t1* doc/*.dvi
 
-gzip -9nf Changes README.%{name}-%{version} doc/*.dvi
+
+%post 	-p /sbin/ldconfig
+%postun -p /sbin/ldconfig
+
+%post fonts
+cd %{_fontdir}/Type1
+/usr/bin/type1inst -nogs -nolog
+
+%postun fonts
+cd %{_fontdir}/Type1
+/usr/bin/type1inst -nogs -nolog
 
 %clean
 rm -r $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc {Changes,README.%{name}-%{version},doc/*.dvi}.gz 
+%doc {Changes,README.t1*,doc/*.dvi}.gz 
 %doc doc/*.{tex,eps,fig}
+
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/*.so.*
-%dir %{_datadir}/%{name}-%{version}
-%dir %{_datadir}/%{name}-%{version}/enc
-%dir %{_datadir}/%{name}-%{version}/afm
-%dir %{_datadir}/%{name}-%{version}/type1
-%config %{_datadir}/%{name}-%{version}/t1lib.config
-%{_datadir}/%{name}-%{version}/enc/*
-%{_datadir}/%{name}-%{version}/afm/*
-%{_datadir}/%{name}-%{version}/type1/*
+%attr(755,root,root) %{_libdir}/*.so.*.*
+
+%dir %{_datadir}/%{name}
+%{_datadir}/%{name}/enc
+
+%config(noreplace) %{_datadir}/%{name}/t1lib.config
+
+%files fonts
+%defattr(644,root,root,755)
+%{_fontdir}/Type1/afm/*
+%{_fontdir}/Type1/*.pfb
 
 %files devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/*.so
+%attr(755,root,root) %{_libdir}/*.la
 %{_includedir}/*
-%{_libdir}/*.so
-%{_libdir}/*.la
 
 %files static
 %defattr(644,root,root,755)
