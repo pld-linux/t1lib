@@ -195,7 +195,7 @@ cat Fontmap.* > Fontmap 2>/dev/null
 
 %files
 %defattr(644,root,root,755)
-%doc {Changes,README.t1*,doc/*.dvi}.gz 
+%doc {Changes,README.t1*,doc/*.dvi}.gz
 %doc doc/*.{tex,eps,fig}
 
 %attr(755,root,root) %{_bindir}/type1afm
