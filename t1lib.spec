@@ -109,7 +109,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_datadir},%{_bindir}} \
 	$RPM_BUILD_ROOT{%{_includedir},%{_fontdir}/Type1/afm}
 
-make install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 install Fonts/afm/*.afm		$RPM_BUILD_ROOT%{_fontdir}/Type1/afm
 install Fonts/type1/*.pfb	$RPM_BUILD_ROOT%{_fontdir}/Type1
