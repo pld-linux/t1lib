@@ -2,7 +2,7 @@ Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts
 Summary(pl):	Biblioteka znakowych i ³añcuchowych glifów z fontów Adobe Type 1
 Name:		t1lib
 Version:	1.3.1
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
@@ -17,8 +17,8 @@ BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
-BuildRequires:	tetex-latex
 BuildRequires:	tetex-dvips
+BuildRequires:	tetex-latex
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_xbindir	/usr/X11R6/bin
@@ -87,9 +87,9 @@ rasteryzera zosta³y usuniête. Niektóre cechy t1lib:
 Summary:	Type 1 fonts
 Summary(pl):	Fonty Type 1
 Group:		X11/Fonts
-Requires:	%{name} = %{version}
-Prereq:		textutils
-Prereq:		sed
+Requires(post,postun):	fileutils
+Requires(post,postun):	sed
+Requires(post,postun):	textutils
 
 %description fonts
 Type 1 fonts.
@@ -170,7 +170,7 @@ gzip -9nf Changes README.t1* doc/*.dvi
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post 	-p /sbin/ldconfig
+%post	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %post fonts
