@@ -105,7 +105,7 @@ rasteryzera zosta³y usuniête. Niektóre cechy t1lib:
 - wsparcie dla podkre¶lania, nadkre¶lania, przekre¶lania
 - nowe wektory kodowania mog± byæ wczytane w czasie dzia³ania i fonty
   mog± byæ ponownie zakodowane przy u¿yciu tych wektorów
-- antyaliasing zaimplementowany przy u¿yciu trzech stopni szaaro¶ci
+- antyaliasing zaimplementowany przy u¿yciu trzech stopni szaro¶ci
   pomiêdzy czerni± a biel±
 - interaktywny program testowy xglyph - w osobnym pakiecie (wymaga X).
 
