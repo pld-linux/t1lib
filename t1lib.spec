@@ -18,6 +18,7 @@ Source2:	%{name}-fonts.fonts.scale
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-doc.patch
 Patch2:		%{name}-config.patch
+Patch3:		%{name}-dontprint.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
@@ -162,6 +163,7 @@ Program testowy dla t1lib z interfejsem X11.
 %patch0 -p1
 %patch1 -p0
 %patch2 -p0
+%patch3 -p1
 
 %build
 libtoolize --copy --force
