@@ -54,7 +54,6 @@ of the features:
 Summary:	Type 1 fonts
 Summary(pl):	Fonty Type 1
 Group:		X11/Fonts
-Group(de):	
 Group(pl):	X11/Fonty
 Requires:	%{name} = %{version}
 Prereq:		type1inst >= 0.6.1
