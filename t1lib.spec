@@ -123,7 +123,7 @@ T1lib - це б╕бл╕отека для створенння гл╕ф╕в символ╕в та ланцюжк╕в
 %package fonts
 Summary:	Type 1 fonts
 Summary(pl):	Fonty Type 1
-Group:		X11/Fonts
+Group:		Fonts
 Requires(post,postun):	fontpostinst >= 0.1-6
 Requires:	%{_fontsdir}/Type1
 
