@@ -1,6 +1,7 @@
 #
 # Conditional build:
 %bcond_without	doc	# do not build documentation with LaTeX
+%bcond_with	xlibs	# build with xlibs instead of XFree86
 #
 Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts
 Summary(pl):	Biblioteka znakowych i ³añcuchowych glifów z fontów Adobe Type 1
@@ -25,7 +26,11 @@ Patch3:		%{name}-KernMapSize.patch
 Patch4:		%{name}-man.patch
 Patch5:		%{name}-xglyph.patch
 Patch6:		%{name}-link.patch
+%if %{with xlibs}
+BuildRequires:	libXaw-devel
+%else
 BuildRequires:	XFree86-devel
+%endif
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
