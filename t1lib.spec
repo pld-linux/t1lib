@@ -14,7 +14,6 @@ URL:		http://www.windowmaker.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	tetex
 BuildRequires:	tetex-latex
-BuildRequires:	type1inst >= 0.6.1
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %define		_fontdir	/usr/share/fonts
