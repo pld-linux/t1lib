@@ -83,7 +83,7 @@ rm -r $RPM_BUILD_ROOT
 
 %files
 %doc Changes LGPL LICENSE README.t1lib-0.8-beta doc/*
-%attr(-,root,root) /usr/bin/*
+%attr(-,root,root) %{_bindir}/*
 %attr(-,root,root) %{_libdir}/*.so.*
 %attr(-,root,root) %dir %{_datadir}/t1lib-0.8
 %attr(-,root,root) %config %{_datadir}/t1lib-0.8/t1lib.config
