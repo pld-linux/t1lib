@@ -80,12 +80,12 @@ do
 	fi
 	fontpath="$fontpath$i:"
 
-	for j in `find $i -name "*.afm" -type f -mindepth 1 -maxdepth 2 -printf "%h\n" | sort | uniq`; do
+	for j in `find $i -mindepth 1 -maxdepth 2 -name "*.afm" -type f -printf "%h\n" | sort | uniq`; do
 		afmpath="$afmpath$j:"
 	done
 
 	# get a listing of all the fonts in each dir
-	find $i -name "*.pf[ab]" -type f -maxdepth 1 -printf '%f\n' >> $temp
+	find $i -maxdepth 1 -name "*.pf[ab]" -type f -printf '%f\n' >> $temp
 done
 fontpath=${fontpath%:}
 afmpath=${afmpath%:}
