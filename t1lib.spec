@@ -100,7 +100,3 @@ rm -r $RPM_BUILD_ROOT
 %attr(-,root,root) %{_includedir}/*
 %attr(-,root,root) %{_libdir}/*.a
 %attr(-,root,root) %{_libdir}/*.so
-
-%changelog
-* Tue Jul 21 1998 Kjetil Wiekhorst Jørgensen <jorgens@pvv.org>
-- Initial relaese as RPM.
