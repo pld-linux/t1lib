@@ -1,0 +1,21 @@
+--- t1lib-1.3.1.orig/xglyph/xglyph.c
++++ t1lib-1.3.1/xglyph/xglyph.c
+@@ -511,12 +511,16 @@
+   time_ptr_start=&time_start;
+   time_ptr_stop=&time_stop;
+   
++/* This chunk causes xglyph not to work at all in the default
++   Debian package install.  Plus it violates policy (programs
++   should not depend on environment variables). */
++#if 0
+   /* Check for environment entry. If not set, set it to current
+      directory so that configuration file is found there */
+   if (getenv("T1LIB_CONFIG")==NULL){
+     putenv( "T1LIB_CONFIG=./t1lib.config");
+   }
+-
++#endif
+   
+   /* Set log-level: */
+   T1_SetLogLevel( loglevel & (~(0x01<<8)));
+
