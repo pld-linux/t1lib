@@ -1,7 +1,7 @@
 Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts
 Summary(pl):	Biblioteka znakowych i ³añcuchowych glifów z fontów Adobe Type 1
 Name:		t1lib
-Version:	1.2
+Version:	1.3
 Release:	1
 License:	LGPL
 Group:		Libraries
@@ -19,8 +19,10 @@ Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-doc.patch
 Patch2:		%{name}-config.patch
 URL:		http://www.windowmaker.org/
-BuildRequires:	autoconf
 BuildRequires:	XFree86-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool
 BuildRequires:	tetex-latex
 BuildRequires:	tetex-dvips
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -162,6 +164,9 @@ Program testowy dla t1lib z interfejsem X11.
 %patch2 -p0
 
 %build
+libtoolize --copy --force
+aclocal
+mv -f aclocal.m4 ac-tools
 autoconf
 %configure
 
