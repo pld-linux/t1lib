@@ -22,6 +22,7 @@ URL:		http://www.windowmaker.org/
 BuildRequires:	autoconf
 BuildRequires:	XFree86-devel
 BuildRequires:	tetex-latex
+BuildRequires:	tetex-dvips
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_xbindir	/usr/X11R6/bin
