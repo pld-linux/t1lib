@@ -23,8 +23,8 @@ BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
-BuildRequires:	tetex-dvips
-BuildRequires:	tetex-latex
+%{!?_without_doc:BuildRequires:	tetex-dvips}
+%{!?_without_doc:BuildRequires:	tetex-latex}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	libt1lib1.3.1
 Obsoletes:	libt1lib1.3.1-progs
