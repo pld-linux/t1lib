@@ -1,3 +1,7 @@
+#
+# Conditional build:
+# _without_doc - do not build documentation with LaTeX
+#
 Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts
 Summary(pl):	Biblioteka znakowych i ³añcuchowych glifów z fontów Adobe Type 1
 Summary(pt_BR):	Rasterizador de fontes Type 1
@@ -23,8 +27,11 @@ BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
-%{!?_without_doc:BuildRequires:	tetex-dvips}
-%{!?_without_doc:BuildRequires:	tetex-latex}
+%if %{!?_without_doc:1}0
+BuildRequires:	tetex-dvips
+BuildRequires:	tetex-latex
+BuildRequires:	tetex-makeindex
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	libt1lib1.3.1
 Obsoletes:	libt1lib1.3.1-progs
