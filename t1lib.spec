@@ -1,7 +1,7 @@
 Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts
 Name:		t1lib
 Version:	1.0.1
-Release:	2
+Release:	3
 License:	LGPL
 Group:		Libraries
 Group(fr):	Librairies
@@ -91,6 +91,19 @@ Static libraries for t1lib.
 %description devel -l pl
 Biblioteki statyczne dla t1lib.
 
+%package xglyph
+Summary:	Test program for t1lib with X11 interface
+Summary:	Program testowy dla t1lib z interfejsem X11
+Group:		X11/Applications
+Group(pl):	X11/Aplikacje
+Requires:	%{name}-devel = %{version}
+
+%description xglyph
+Test program for t1lib with X11 interface.
+
+%description xglyph -l pl
+Program testowy dla t1lib z interfejsem X11.
+
 %prep
 %setup -q -n T1-%{version}
 %patch0 -p1
@@ -107,13 +120,16 @@ LDFLAGS="-s"; export LDFLAGS
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_datadir},%{_bindir}} \
-	$RPM_BUILD_ROOT{%{_includedir},%{_fontdir}/Type1/afm}
+	$RPM_BUILD_ROOT{%{_includedir},%{_fontdir}/Type1/afm} \
+	$RPM_BUILD_ROOT/usr/X11R6/bin
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 install Fonts/afm/*.afm		$RPM_BUILD_ROOT%{_fontdir}/Type1/afm
 install Fonts/type1/*.pfb	$RPM_BUILD_ROOT%{_fontdir}/Type1
 cp -a Fonts/enc			$RPM_BUILD_ROOT%{_datadir}/%{name}
+
+mv $RPM_BUILD_ROOT{%{_bindir}/xglyph,/usr/X11R6/bin}
 
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/*.so.*.*
 
@@ -138,7 +154,7 @@ rm -r $RPM_BUILD_ROOT
 %doc {Changes,README.t1*,doc/*.dvi}.gz 
 %doc doc/*.{tex,eps,fig}
 
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/type1afm
 %attr(755,root,root) %{_libdir}/*.so.*.*
 
 %dir %{_datadir}/%{name}
@@ -160,3 +176,7 @@ rm -r $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/*.a
+
+%files xglyph
+%defattr(644,root,root,755)
+%attr(755,root,root) /usr/X11R6/bin/xglyph
