@@ -140,11 +140,11 @@ gzip -9nf Changes README.t1* doc/*.dvi
 
 %post fonts
 cd %{_fontdir}/Type1
-%{_bindir}/type1inst -nolog
+%{_bindir}/type1inst -nolog -q
 
 %postun fonts
 cd %{_fontdir}/Type1
-%{_bindir}/type1inst -nolog
+%{_bindir}/type1inst -nolog -q
 
 %clean
 rm -r $RPM_BUILD_ROOT
