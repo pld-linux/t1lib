@@ -1,0 +1,11 @@
+--- Makefile.in~	Tue Feb 23 17:50:13 1999
++++ Makefile.in	Wed Jul 14 22:45:43 1999
+@@ -105,7 +105,7 @@
+ 
+ 
+ install: dummy
+-	for i in $(ALLSUBDIRS) $(DOCSUBDIRS); do \
++	for i in $(ALLSUBDIRS); do \
+ 	  (cd $$i; $(MAKE) install) || exit 1; \
+ 	done
+ 

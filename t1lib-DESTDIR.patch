@@ -1,0 +1,46 @@
+--- lib/Makefile.in~	Tue Feb 23 17:50:14 1999
++++ lib/Makefile.in	Wed Jul 14 22:30:58 1999
+@@ -163,15 +163,15 @@
+ 
+ install: dummy
+ 	$(LIBTOOL) --mode=install \
+-		$(INSTALL_DATA) $(MAIN_TARGET) $(libdir)
++		$(INSTALL_DATA) $(MAIN_TARGET) $(DESTDIR)$(libdir)
+ 	$(LIBTOOL) --mode=install \
+-		$(INSTALL_DATA) $(MAIN_HEADER) $(includedir)
+-	$(MKINSTALLDIRS) $(datadir)/t1lib-$(t1lib_version).$(t1lib_revision)
+-	if (test -f $(datadir)/t1lib-$(t1lib_version).$(t1lib_revision)/t1lib.config) \
++		$(INSTALL_DATA) $(MAIN_HEADER) $(DESTDIR)$(includedir)
++	$(MKINSTALLDIRS) $(DESTDIR)$(datadir)/t1lib-$(t1lib_version).$(t1lib_revision)
++	if (test -f $(DESTDIR)$(datadir)/t1lib-$(t1lib_version).$(t1lib_revision)/t1lib.config) \
+ 	then \
+ 	  echo "Alert: Global configuration file exists, installation skipped!"; \
+ 	else \
+-	  $(LIBTOOL) --mode=install $(INSTALL_DATA) t1lib.config $(datadir)/t1lib-$(t1lib_version).$(t1lib_revision); \
++	  $(LIBTOOL) --mode=install $(INSTALL_DATA) t1lib.config $(DESTDIR)$(datadir)/t1lib-$(t1lib_version).$(t1lib_revision); \
+ 	fi;
+ 
+ 
+--- type1afm/Makefile.in~	Tue Feb 23 17:50:14 1999
++++ type1afm/Makefile.in	Wed Jul 14 22:31:23 1999
+@@ -91,7 +91,7 @@
+ 
+ install: dummy
+ 	$(LIBTOOL) --mode=install \
+-		$(INSTALL_PROGRAM) type1afm $(bindir)/type1afm
++		$(INSTALL_PROGRAM) type1afm $(DESTDIR)$(bindir)/type1afm
+ 
+ 
+ uninstall: dummy
+--- xglyph/Makefile.in~	Tue Mar 16 10:52:56 1999
++++ xglyph/Makefile.in	Wed Jul 14 22:32:01 1999
+@@ -96,8 +96,8 @@
+ 	-rmdir .libs
+ 
+ 
+ install: dummy
+-	$(LIBTOOL) --mode=install $(INSTALL_PROGRAM) xglyph $(bindir)/xglyph
++	$(LIBTOOL) --mode=install $(INSTALL_PROGRAM) xglyph $(DESTDIR)$(bindir)/xglyph
+ 
+ 
+ uninstall: dummy
