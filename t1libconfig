@@ -1,0 +1,129 @@
+#!/bin/sh -e
+
+# to test POSIX-correctness, change hash-bang to /bin/bash and uncomment
+# the following line:
+
+# set -o posix
+
+# Very simple configuration script for t1lib.  Checks system font
+# directory and adds anything ending in .pfa or pfb to the font
+# database.  A few things borrowed from paperconfig, (C) 1996, Yves
+# Arrouye <arrouye@debian.org>
+
+# Based on script written by David Huggins-Daines <dhd@debian.org>
+
+usage() {
+	cat <<EOF
+
+Usage: `basename $0` [ -v, --version ] [ -h, --help ] [ --force ]
+                   [ fontdirs... ]
+
+Options: -v, --version          print version information and exit
+         -h, --help             print this help and exit
+         --force                force configuration
+EOF
+	exit 0
+}
+
+version=0.3
+confdir=/etc/t1lib
+conffile=$confdir/t1lib.config
+dbase=$confdir/FontDatabase
+temp=$confdir/FontDatabase.tmp
+force=0
+fontdirs="/usr/share/fonts/Type1"
+
+while [ $# -ne 0 ]
+do
+	case "$1" in
+		-v|--version)
+			echo "`basename $0` version $version"
+			exit 0
+			;;
+		-h|--help)
+			usage
+			;;
+		--force)
+			force=1
+			;;
+		*)
+			pat=${1%/}
+			if ! grep -x $pat <<EOF >/dev/null 2>&1
+$fontdirs
+EOF
+			then
+				fontdirs="$fontdirs $1"
+			fi
+			;;
+	esac
+	shift
+done
+
+# We presume that if the database exists, then so does the
+# configuration file.  Hopefully this won't break anything.
+
+if [ $force -ne 1 ] && [ -e $dbase ]; then
+	echo "Configuration and font database files already exist."
+	echo "Run /usr/sbin/t1libconfig --force to rebuild them."
+	exit 0
+fi
+
+fontpath=""
+afmpath=""
+mkdir -p $confdir || true
+echo -n "Searching for Type 1 fonts and AFM files..."
+
+for i in $fontdirs
+do
+	if [ ! -d $i ] || [ "`echo $i/*.pf[ab]`" = "$i/*.pf[ab]" ]; then
+		continue
+	fi
+	fontpath="$fontpath$i:"
+
+	for j in `find $i -name "*.afm" -type f -mindepth 1 -maxdepth 2 -printf "%h\n" | sort | uniq`; do
+		afmpath="$afmpath$j:"
+	done
+
+	# get a listing of all the fonts in each dir
+	find $i -name "*.pf[ab]" -type f -maxdepth 1 -printf '%f\n' >> $temp
+done
+fontpath=${fontpath%:}
+afmpath=${afmpath%:}
+
+if [ -z "$fontpath" ]; then
+	cat <<EOF
+
+
+No Type 1 fonts were found in the expected locations.
+If you want t1lib to be aware of your fonts, you should run
+$0 with the names of your local font directories as
+arguments, or you should edit the $dbase file manually.
+See the FontDatabase(5) manual page for more information.
+
+EOF
+	rm -f $temp
+else
+	echo " done."
+	echo -n "Building font database..."
+	fontcount=`cat $temp | wc -l || true`
+	echo $fontcount > $dbase
+	cat $temp >> $dbase
+	rm -f $temp
+	echo " done."
+fi
+
+# now set the paths in the config file
+cat <<EOF >$conffile
+t1lib.config - global configuration file for t1lib.
+It was created automatically on `date`
+by the t1libconfig script.
+
+Run $0 --force to rebuild it.
+
+ENCODING=$confdir/enc
+AFM=$afmpath
+TYPE1=$fontpath
+FONTDATABASE=$dbase
+EOF
+
+exit 0

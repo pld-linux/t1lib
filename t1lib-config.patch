@@ -9,7 +9,7 @@
 -AFM=.
 -TYPE1=.
 +
-+ENCODING=./enc
++ENCODING=/etc/t1lib/enc
 +AFM=/usr/share/fonts/Type1/afm
 +TYPE1=/usr/share/fonts/Type1
-+#FONTDATABASE=
++FONTDATABASE=/etc/t1lib/FontDatabase
