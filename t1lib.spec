@@ -1,4 +1,4 @@
-Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts.
+Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts
 Name:		t1lib
 Version:	1.0.1
 Release:	2
