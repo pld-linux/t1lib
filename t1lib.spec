@@ -44,6 +44,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_t1fontsdir	%{_fontsdir}/Type1
 %define		_t1afmdir	%{_t1fontsdir}/afm
 %define		_datadir	/etc
+%define		specflags_ia32	"-fomit-frame-pointer"
 
 %description
 t1lib is a library distributed under the GNU General Public Library
@@ -228,7 +229,7 @@ install %{SOURCE2} $RPM_BUILD_ROOT%{_t1fontsdir}/fonts.scale.%{name}-fonts
 
 install %{SOURCE3} $RPM_BUILD_ROOT%{_bindir}
 
-touch $RPM_BUILD_ROOT%{_datadir}/%{name}/FontDatabase
+> $RPM_BUILD_ROOT%{_datadir}/%{name}/FontDatabase
 
 for sec in 1 5; do
 	install debian/*.${sec} $RPM_BUILD_ROOT%{_mandir}/man${sec}
