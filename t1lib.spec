@@ -8,12 +8,12 @@ Summary(pt_BR):	Rasterizador de fontes Type 1
 Summary(ru):	Растеризатор шрифтов Type 1
 Summary(uk):	Растеризатор шрифт╕в Type 1
 Name:		t1lib
-Version:	5.0.1
+Version:	5.0.2
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
-# Source0-md5:	b4e14bc4bf322c88da41a98f73c19b98
+# Source0-md5:	cc5d4130b25bb8a1c930488b78930e9b
 Source1:	%{name}-fonts.Fontmap
 Source2:	%{name}-fonts.fonts.scale
 Source3:	%{name}config
