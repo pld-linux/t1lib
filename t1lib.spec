@@ -2,7 +2,7 @@ Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts
 Summary(pl):	Biblioteka znakowych i ³añcuchowych glifów z fontów Adobe Type 1
 Name:		t1lib
 Version:	1.3.1
-Release:	2
+Release:	3
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
@@ -12,7 +12,10 @@ Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-doc.patch
 Patch2:		%{name}-config.patch
 Patch3:		%{name}-dontprint.patch
-URL:		http://www.windowmaker.org/
+Patch4:		%{name}-KernMapSize.patch
+Patch5:		%{name}-man.patch
+Patch6:		%{name}-t1libconfig.patch
+Patch7:		%{name}-xglyph.patch
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -24,6 +27,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_xbindir	/usr/X11R6/bin
 %define		_t1fontsdir	%{_fontsdir}/Type1
 %define		_t1afmdir	%{_t1fontsdir}/afm
+%define		_datadir	/etc
 
 %description
 t1lib is a library distributed under the GNU General Public Library
@@ -139,6 +143,10 @@ Program testowy dla t1lib z interfejsem X11.
 %patch1 -p0
 %patch2 -p0
 %patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
 
 %build
 libtoolize --copy --force
@@ -147,13 +155,15 @@ mv -f aclocal.m4 ac-tools
 autoconf
 %configure
 
-%{__make}
+
+%{__make} %{?_without_doc:without_doc}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_datadir},%{_bindir}} \
 	$RPM_BUILD_ROOT{%{_includedir},%{_xbindir}} \
-	$RPM_BUILD_ROOT{%{_t1fontsdir},%{_t1afmdir}}
+	$RPM_BUILD_ROOT{%{_t1fontsdir},%{_t1afmdir}} \
+	$RPM_BUILD_ROOT%{_mandir}/man{1,5,8}
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
@@ -163,9 +173,17 @@ install Fonts/type1/*.pfb $RPM_BUILD_ROOT%{_t1fontsdir}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_t1fontsdir}/Fontmap.%{name}-fonts
 install %{SOURCE2} $RPM_BUILD_ROOT%{_t1fontsdir}/fonts.scale.%{name}-fonts
 
+install debian/t1libconfig $RPM_BUILD_ROOT/%{_bindir}/
+
+touch $RPM_BUILD_ROOT/%{_datadir}/%{name}/FontDatabase
+
+for sec in 1 5 8 ; do
+	install debian/*.${sec} $RPM_BUILD_ROOT/%{_mandir}/man${sec}/
+done
+
 mv -f $RPM_BUILD_ROOT%{_bindir}/xglyph $RPM_BUILD_ROOT%{_xbindir}
 
-gzip -9nf Changes README.t1* doc/*.dvi
+gzip -9nf Changes README.t1* %{!?_without_doc:doc/*.dvi}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -195,16 +213,24 @@ cat Fontmap.* > Fontmap 2>/dev/null
 
 %files
 %defattr(644,root,root,755)
-%doc {Changes,README.t1*,doc/*.dvi}.gz
+%doc {Changes,README.t1*}.gz
+%if %{?_without_doc:0}%{!?_without_doc:1}
+%doc doc/*.dvi.gz
+%endif
 %doc doc/*.{tex,eps,fig}
 
 %attr(755,root,root) %{_bindir}/type1afm
+%attr(755,root,root) %{_bindir}/t1libconfig
 %attr(755,root,root) %{_libdir}/*.so.*.*
 
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/enc
 
 %config(noreplace) %{_datadir}/%{name}/t1lib.config
+%config(noreplace) %{_datadir}/%{name}/FontDatabase
+
+%{_mandir}/man[58]/*
+%{_mandir}/man1/type1afm.1*
 
 %files fonts
 %defattr(644,root,root,755)
@@ -225,3 +251,4 @@ cat Fontmap.* > Fontmap 2>/dev/null
 %files xglyph
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_xbindir}/xglyph
+%{_mandir}/man1/xglyph.1*
