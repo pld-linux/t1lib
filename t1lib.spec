@@ -4,12 +4,13 @@ Version:	1.0.1
 Release:	5
 License:	LGPL
 Group:		Libraries
+Group(de):	Libraries
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
-Patch0:		t1lib-DESTDIR.patch
-Patch1:		t1lib-doc.patch
-Patch2:		t1lib-config.patch
+Patch0:		%{name}-DESTDIR.patch
+Patch1:		%{name}-doc.patch
+Patch2:		%{name}-config.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	tetex
@@ -53,6 +54,7 @@ of the features:
 Summary:	Type 1 fonts
 Summary(pl):	Fonty Type 1
 Group:		X11/Fonts
+Group(de):	
 Group(pl):	X11/Fonty
 Requires:	%{name} = %{version}
 Prereq:		type1inst >= 0.6.1
@@ -67,6 +69,7 @@ Zestaw fontów Type 1.
 Summary:	Development files for t1lib
 Summary(pl):	Pliki nag³ówkowe i biblioteki dla t1lib
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
@@ -82,6 +85,7 @@ Pliki niezbêdne do tworzenia aplikacji z wykorzystaniem t1lib.
 Summary:	Static libraries for t1lib
 Summary(pl):	Biblioteki statyczne dla t1lib
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
@@ -96,6 +100,7 @@ Biblioteki statyczne dla t1lib.
 Summary:	Test program for t1lib with X11 interface
 Summary:	Program testowy dla t1lib z interfejsem X11
 Group:		X11/Applications
+Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
 Requires:	%{name}-devel = %{version}
 
@@ -113,7 +118,6 @@ Program testowy dla t1lib z interfejsem X11.
 
 %build
 autoconf
-LDFLAGS="-s"; export LDFLAGS
 %configure
 
 %{__make}
@@ -130,7 +134,7 @@ install Fonts/afm/*.afm		$RPM_BUILD_ROOT%{_fontdir}/Type1/afm
 install Fonts/type1/*.pfb	$RPM_BUILD_ROOT%{_fontdir}/Type1
 cp -a Fonts/enc			$RPM_BUILD_ROOT%{_datadir}/%{name}
 
-mv $RPM_BUILD_ROOT{%{_bindir}/xglyph,/usr/X11R6/bin}
+mv -f $RPM_BUILD_ROOT%{_bindir}/xglyph $RPM_BUILD_ROOT/usr/X11R6/bin
 
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/*.so.*.*
 
@@ -141,14 +145,14 @@ gzip -9nf Changes README.t1* doc/*.dvi
 
 %post fonts
 cd %{_fontdir}/Type1
-%{_bindir}/type1inst -nolog -q
+/usr/bin/type1inst -nolog -q
 
 %postun fonts
 cd %{_fontdir}/Type1
-%{_bindir}/type1inst -nolog -q
+/usr/bin/type1inst -nolog -q
 
 %clean
-rm -r $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
