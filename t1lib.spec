@@ -1,8 +1,8 @@
 Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts
 Summary(pl):	Biblioteka znakowych i ³añcuchowych glifów z fontów Adobe Type 1
 Name:		t1lib
-Version:	1.3
-Release:	2
+Version:	1.3.1
+Release:	1
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
@@ -159,7 +159,7 @@ Test program for t1lib with X11 interface.
 Program testowy dla t1lib z interfejsem X11.
 
 %prep
-%setup -q -n T1Lib-%{version}
+%setup -q
 %patch0 -p1
 %patch1 -p0
 %patch2 -p0
