@@ -196,7 +196,7 @@ Program testowy dla t1lib z interfejsem X11.
 
 %build
 %{__libtoolize}
-aclocal
+%{__aclocal}
 mv -f aclocal.m4 ac-tools
 %{__autoconf}
 %configure
