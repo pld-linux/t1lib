@@ -5,7 +5,7 @@ Summary(ru):	Растеризатор шрифтов Type 1
 Summary(uk):	Растеризатор шрифт╕в Type 1
 Name:		t1lib
 Version:	1.3.1
-Release:	3
+Release:	4
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
@@ -229,8 +229,6 @@ done
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/xglyph $RPM_BUILD_ROOT%{_xbindir}
 
-gzip -9nf Changes README.t1* %{!?_without_doc:doc/*.dvi}
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -259,9 +257,9 @@ cat Fontmap.* > Fontmap 2>/dev/null
 
 %files
 %defattr(644,root,root,755)
-%doc {Changes,README.t1*}.gz
+%doc Changes README.t1*
 %if %{?_without_doc:0}%{!?_without_doc:1}
-%doc doc/*.dvi.gz
+%doc doc/*.dvi
 %endif
 %doc doc/*.{tex,eps,fig}
 
