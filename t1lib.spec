@@ -105,14 +105,14 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_datadir},%{_bindir},%{_includedir}} \
-	$RPM_BUILD_ROOT%{_fontdir}/Type1/afm
+install -d $RPM_BUILD_ROOT{%{_libdir},%{_datadir}/enc,%{_bindir}} \
+	$RPM_BUILD_ROOT{%{_includedir},%{_fontdir}/Type1/afm}
 
 make install DESTDIR=$RPM_BUILD_ROOT
 
-cp -a Fonts/afm/*.afm	$RPM_BUILD_ROOT%{_fontdir}/Type1/afm
-cp -a Fonts/type1/*.pfb	$RPM_BUILD_ROOT%{_fontdir}/Type1
-cp -a Fonts/enc		$RPM_BUILD_ROOT%{_datadir}/%{name}
+install Fonts/afm/*.afm		$RPM_BUILD_ROOT%{_fontdir}/Type1/afm
+install Fonts/type1/*.pfb	$RPM_BUILD_ROOT%{_fontdir}/Type1
+install Fonts/enc/*		$RPM_BUILD_ROOT%{_datadir}/%{name}/enc
 
 gzip -9nf Changes README.t1* doc/*.dvi
 
