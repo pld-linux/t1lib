@@ -84,7 +84,7 @@ rm -r $RPM_BUILD_ROOT
 %files
 %doc Changes LGPL LICENSE README.t1lib-0.8-beta doc/*
 %attr(-,root,root) /usr/bin/*
-%attr(-,root,root) /usr/lib/*.so.*
+%attr(-,root,root) %{_libdir}/*.so.*
 %attr(-,root,root) %dir /usr/share/t1lib-0.8
 %attr(-,root,root) %config /usr/share/t1lib-0.8/t1lib.config
 %attr(-,root,root) %dir /usr/share/t1lib-0.8/enc
@@ -98,8 +98,8 @@ rm -r $RPM_BUILD_ROOT
 
 %files devel
 %attr(-,root,root) /usr/include/*
-%attr(-,root,root) /usr/lib/*.a
-%attr(-,root,root) /usr/lib/*.so
+%attr(-,root,root) %{_libdir}/*.a
+%attr(-,root,root) %{_libdir}/*.so
 
 %changelog
 * Tue Jul 21 1998 Kjetil Wiekhorst Jørgensen <jorgens@pvv.org>
