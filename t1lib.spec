@@ -63,6 +63,7 @@ Group(de):	X11/Fonts
 Group(pl):	X11/Fonty
 Requires:	%{name} = %{version}
 Prereq:		textutils
+Prereq:		sed
 
 %description fonts
 Type 1 fonts.
@@ -152,8 +153,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %post fonts
 cd %{_t1fontsdir}
+rm -f fonts.scale.bak Fontmap.bak
 cat fonts.scale.* | sort -u > fonts.scale.tmp
-wc -l fonts.scale.tmp > fonts.scale
+cat fonts.scale.tmp | wc -l | sed -e 's/ //g' > fonts.scale
 cat fonts.scale.tmp >> fonts.scale
 rm -f fonts.scale.tmp
 ln -sf fonts.scale fonts.dir
@@ -161,8 +163,9 @@ cat Fontmap.* > Fontmap
 
 %postun fonts
 cd %{_t1fontsdir}
+rm -f fonts.scale.bak Fontmap.bak
 cat fonts.scale.* 2>/dev/null | sort -u > fonts.scale.tmp
-wc -l fonts.scale.tmp > fonts.scale
+cat fonts.scale.tmp | wc -l | sed -e 's/ //g' > fonts.scale
 cat fonts.scale.tmp >> fonts.scale
 rm -f fonts.scale.tmp
 ln -sf fonts.scale fonts.dir
