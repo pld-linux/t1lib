@@ -1,5 +1,8 @@
 Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts
 Summary(pl):	Biblioteka znakowych i ЁaЯcuchowych glifСw z fontСw Adobe Type 1
+Summary(pt_BR):	Rasterizador de fontes Type 1
+Summary(ru):	Растеризатор шрифтов Type 1
+Summary(uk):	Растеризатор шрифт╕в Type 1
 Name:		t1lib
 Version:	1.3.1
 Release:	3
@@ -14,7 +17,7 @@ Patch2:		%{name}-config.patch
 Patch3:		%{name}-dontprint.patch
 Patch4:		%{name}-KernMapSize.patch
 Patch5:		%{name}-man.patch
-Patch6:		%{name}-t1libconfig.patch
+Patch6:		%{name}-%{name}config.patch
 Patch7:		%{name}-xglyph.patch
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
@@ -23,6 +26,8 @@ BuildRequires:	libtool
 BuildRequires:	tetex-dvips
 BuildRequires:	tetex-latex
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Obsletes:	libt1lib1.3.1
+Obsletes:	libt1lib1.3.1-progs
 
 %define		_xbindir	/usr/X11R6/bin
 %define		_t1fontsdir	%{_fontsdir}/Type1
@@ -87,13 +92,30 @@ rasteryzera zostaЁy usuniЙte. NiektСre cechy t1lib:
   pomiЙdzy czerni╠ a biel╠
 - interaktywny program testowy xglyph - w osobnym pakiecie (wymaga X).
 
+%description -l pt_BR
+Rasterizador de fontes Type 1 da Adobe.
+
+%description -l ru
+T1lib - это библиотека для создания глифов символов и цепочек символов
+из шрифтов Adobe Type 1. T1lib использует код растеризатора для X11
+подаренного фирмой IBM проекту X11. Но некоторые недостатки
+включенного в X11 растеризатора были устранены. T1lib включает также
+поддержку антиалиасинга.
+
+%description -l uk
+T1lib - це б╕бл╕отека для створенння гл╕ф╕в символ╕в та ланцюжк╕в
+символ╕в з шрифт╕в Adobe Type 1. T1lib використову╓ код растеризатора
+для X11 подарованого ф╕рмою IBM проекту X11. Але деяк╕ недол╕ки
+включеного в X11 растеризатора були прибран╕. T1lib також включа╓
+п╕дтримку антиал╕асинга.
+
 %package fonts
 Summary:	Type 1 fonts
 Summary(pl):	Fonty Type 1
 Group:		X11/Fonts
-Requires(post,postun):	fileutils
-Requires(post,postun):	sed
-Requires(post,postun):	textutils
+Requires(post,postun):fileutils
+Requires(post,postun):sed
+Requires(post,postun):textutils
 
 %description fonts
 Type 1 fonts.
@@ -104,8 +126,12 @@ Zestaw fontСw Type 1.
 %package devel
 Summary:	Development files for t1lib
 Summary(pl):	Pliki nagЁСwkowe i biblioteki dla t1lib
+Summary(pt_BR):	Arquivos de inclusЦo e bibliotecas para o desenvolvimento com a T1lib
+Summary(ru):	Растеризатор шрифтов Type 1 - файлы для разработки программ
+Summary(uk):	Растеризатор шрифт╕в Type 1 - файли для розробки програм
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
+Obsletes:	libt1lib1.3.1-devel
 
 %description devel
 The files needed for developing applications using t1lib.
@@ -113,9 +139,20 @@ The files needed for developing applications using t1lib.
 %description devel -l pl
 Pliki niezbЙdne do tworzenia aplikacji z wykorzystaniem t1lib.
 
+%description devel -l pt_BR
+Arquivos de inclusЦo e bibliotecas para o desenvolvimento de programas
+t1lib.
+
+%description devel -l ru
+Файлы необходимые для компиляции использующих t1lib пакетов.
+
+%description devel -l uk
+Файли потр╕бн╕ для комп╕ляц╕╖ пакет╕в, що використовують t1lib.
+
 %package static
 Summary:	Static libraries for t1lib
 Summary(pl):	Biblioteki statyczne dla t1lib
+Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com t1lib
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}
 
@@ -124,6 +161,15 @@ Static libraries for t1lib.
 
 %description static -l pl
 Biblioteki statyczne dla t1lib.
+
+%description static -l pt_BR
+Bibliotecas estАticas para desenvolvimento com t1lib
+
+%description static -l ru
+Статическая библиотека для программирования с t1lib.
+
+%description static -l uk
+Статична б╕бл╕отека для програмування з t1lib.
 
 %package xglyph
 Summary:	Test program for t1lib with X11 interface
