@@ -9,19 +9,20 @@ Summary(ru):	Растеризатор шрифтов Type 1
 Summary(uk):	Растеризатор шрифт╕в Type 1
 Name:		t1lib
 Version:	5.0.0
-Release:	2
+Release:	3
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
 # Source0-md5: 6b5d79840ec2be72b506c12abb040a60
 Source1:	%{name}-fonts.Fontmap
 Source2:	%{name}-fonts.fonts.scale
+Source3:	%{name}config
+Source4:	%{name}config.8
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-doc.patch
 Patch2:		%{name}-config.patch
 Patch4:		%{name}-KernMapSize.patch
 Patch5:		%{name}-man.patch
-Patch6:		%{name}-%{name}config.patch
 Patch7:		%{name}-xglyph.patch
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
@@ -124,6 +125,7 @@ Summary:	Type 1 fonts
 Summary(pl):	Fonty Type 1
 Group:		X11/Fonts
 Requires(post,postun):	fontpostinst >= 0.1-6
+Requires:	%{_fontsdir}/Type1
 
 %description fonts
 Type 1 fonts.
@@ -198,7 +200,6 @@ Program testowy dla t1lib z interfejsem X11.
 %patch2 -p0
 %patch4 -p1
 %patch5 -p1
-%patch6 -p1
 %patch7 -p1
 
 %build
@@ -225,13 +226,14 @@ install Fonts/type1/*.pfb $RPM_BUILD_ROOT%{_t1fontsdir}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_t1fontsdir}/Fontmap.%{name}-fonts
 install %{SOURCE2} $RPM_BUILD_ROOT%{_t1fontsdir}/fonts.scale.%{name}-fonts
 
-install debian/t1libconfig $RPM_BUILD_ROOT%{_bindir}
+install %{SOURCE3} $RPM_BUILD_ROOT%{_bindir}
 
 touch $RPM_BUILD_ROOT%{_datadir}/%{name}/FontDatabase
 
-for sec in 1 5 8 ; do
+for sec in 1 5; do
 	install debian/*.${sec} $RPM_BUILD_ROOT%{_mandir}/man${sec}
 done
+install %{SOURCE4} $RPM_BUILD_ROOT%{_mandir}/man8
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/xglyph $RPM_BUILD_ROOT%{_xbindir}
 
