@@ -1,6 +1,6 @@
 #
 # Conditional build:
-# _without_doc - do not build documentation with LaTeX
+%bcond_without	doc	# do not build documentation with LaTeX
 #
 Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts
 Summary(pl):	Biblioteka znakowych i ³añcuchowych glifów z fontów Adobe Type 1
@@ -28,7 +28,7 @@ BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
-%if %{!?_without_doc:1}0
+%if %{with doc}
 BuildRequires:	tetex-dvips
 BuildRequires:	tetex-latex
 BuildRequires:	tetex-makeindex
@@ -210,7 +210,7 @@ mv -f aclocal.m4 ac-tools
 %{__autoconf}
 %configure
 
-%{__make} %{?_without_doc:without_doc}
+%{__make} %{!?with_doc:without_doc}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -256,7 +256,7 @@ fontpostinst Type1
 %files
 %defattr(644,root,root,755)
 %doc Changes README.t1*
-%if %{?_without_doc:0}%{!?_without_doc:1}
+%if %{with doc}
 %doc doc/*.dvi
 %endif
 %doc doc/*.{tex,eps,fig}
