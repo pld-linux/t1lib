@@ -1,0 +1,9 @@
+- fixed SIGSEGV (KernMapSize.patch - allways set KernMapSize) (#159)
+- added patches from Debian
+- - man.patch - manuals for type1afm, xglyph and FontDatabase
+- - t1libconfig.patch - tool to generate FontDatabase
+- - xglyph.patch - don't use T1LIB_CONFIG evn. variable
+- remove wrong project URL
+- move configurations files to /etc/%{name}/
+- --without doc bcond to allow building package without installed latex
+- relase 3
