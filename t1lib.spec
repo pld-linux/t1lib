@@ -113,9 +113,8 @@ T1lib - це б╕бл╕отека для створенння гл╕ф╕в символ╕в та ланцюжк╕в
 Summary:	Type 1 fonts
 Summary(pl):	Fonty Type 1
 Group:		X11/Fonts
-Requires(post,postun):fileutils
-Requires(post,postun):sed
-Requires(post,postun):textutils
+Requires(post,postun):	fileutils
+Requires(post,postun):	textutils
 
 %description fonts
 Type 1 fonts.
@@ -201,7 +200,6 @@ mv -f aclocal.m4 ac-tools
 %{__autoconf}
 %configure
 
-
 %{__make} %{?_without_doc:without_doc}
 
 %install
@@ -219,12 +217,12 @@ install Fonts/type1/*.pfb $RPM_BUILD_ROOT%{_t1fontsdir}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_t1fontsdir}/Fontmap.%{name}-fonts
 install %{SOURCE2} $RPM_BUILD_ROOT%{_t1fontsdir}/fonts.scale.%{name}-fonts
 
-install debian/t1libconfig $RPM_BUILD_ROOT/%{_bindir}/
+install debian/t1libconfig $RPM_BUILD_ROOT%{_bindir}
 
-touch $RPM_BUILD_ROOT/%{_datadir}/%{name}/FontDatabase
+touch $RPM_BUILD_ROOT%{_datadir}/%{name}/FontDatabase
 
 for sec in 1 5 8 ; do
-	install debian/*.${sec} $RPM_BUILD_ROOT/%{_mandir}/man${sec}/
+	install debian/*.${sec} $RPM_BUILD_ROOT%{_mandir}/man${sec}
 done
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/xglyph $RPM_BUILD_ROOT%{_xbindir}
@@ -236,20 +234,22 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %post fonts
+umask 022
 cd %{_t1fontsdir}
 rm -f fonts.scale.bak Fontmap.bak
 cat fonts.scale.* | sort -u > fonts.scale.tmp
-cat fonts.scale.tmp | wc -l | sed -e 's/ //g' > fonts.scale
+cat fonts.scale.tmp | wc -l | tr -d ' ' > fonts.scale
 cat fonts.scale.tmp >> fonts.scale
 rm -f fonts.scale.tmp
 ln -sf fonts.scale fonts.dir
 cat Fontmap.* > Fontmap
 
 %postun fonts
+umask 022
 cd %{_t1fontsdir}
 rm -f fonts.scale.bak Fontmap.bak
 cat fonts.scale.* 2>/dev/null | sort -u > fonts.scale.tmp
-cat fonts.scale.tmp | wc -l | sed -e 's/ //g' > fonts.scale
+cat fonts.scale.tmp | wc -l | tr -d ' ' > fonts.scale
 cat fonts.scale.tmp >> fonts.scale
 rm -f fonts.scale.tmp
 ln -sf fonts.scale fonts.dir
