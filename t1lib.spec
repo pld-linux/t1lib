@@ -26,8 +26,8 @@ BuildRequires:	libtool
 BuildRequires:	tetex-dvips
 BuildRequires:	tetex-latex
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Obsletes:	libt1lib1.3.1
-Obsletes:	libt1lib1.3.1-progs
+Obsoletes:	libt1lib1.3.1
+Obsoletes:	libt1lib1.3.1-progs
 
 %define		_xbindir	/usr/X11R6/bin
 %define		_t1fontsdir	%{_fontsdir}/Type1
@@ -131,7 +131,7 @@ Summary(ru):	Растеризатор шрифтов Type 1 - файлы для разработки программ
 Summary(uk):	Растеризатор шрифт╕в Type 1 - файли для розробки програм
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
-Obsletes:	libt1lib1.3.1-devel
+Obsoletes:	libt1lib1.3.1-devel
 
 %description devel
 The files needed for developing applications using t1lib.
