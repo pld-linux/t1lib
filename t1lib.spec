@@ -74,7 +74,7 @@ make
 if [ -d $RPM_BUILD_ROOT ]; then rm -r $RPM_BUILD_ROOT; fi
 mkdir -p $RPM_BUILD_ROOT/usr/{lib,share,bin,include}
 make prefix=$RPM_BUILD_ROOT/usr install
-cp -fr Fonts/* $RPM_BUILD_ROOT/usr/share/t1lib-0.8
+cp -fr Fonts/* $RPM_BUILD_ROOT%{_datadir}/t1lib-0.8
 CFLAGS=$RPM_OPT_FLAGS ./configure --prefix=/usr --with-static-lib
 make
 
@@ -85,16 +85,16 @@ rm -r $RPM_BUILD_ROOT
 %doc Changes LGPL LICENSE README.t1lib-0.8-beta doc/*
 %attr(-,root,root) /usr/bin/*
 %attr(-,root,root) %{_libdir}/*.so.*
-%attr(-,root,root) %dir /usr/share/t1lib-0.8
-%attr(-,root,root) %config /usr/share/t1lib-0.8/t1lib.config
-%attr(-,root,root) %dir /usr/share/t1lib-0.8/enc
-%attr(-,root,root) /usr/share/t1lib-0.8/enc/*
-%attr(-,root,root) %dir /usr/share/t1lib-0.8/afm
-%attr(-,root,root) /usr/share/t1lib-0.8/afm/*
-%attr(-,root,root) %dir /usr/share/t1lib-0.8/type1
-%attr(-,root,root) /usr/share/t1lib-0.8/type1/*
-%attr(-,root,root) %dir /usr/share/t1lib-0.8/doc
-%attr(-,root,root) %doc /usr/share/t1lib-0.8/doc/*
+%attr(-,root,root) %dir %{_datadir}/t1lib-0.8
+%attr(-,root,root) %config %{_datadir}/t1lib-0.8/t1lib.config
+%attr(-,root,root) %dir %{_datadir}/t1lib-0.8/enc
+%attr(-,root,root) %{_datadir}/t1lib-0.8/enc/*
+%attr(-,root,root) %dir %{_datadir}/t1lib-0.8/afm
+%attr(-,root,root) %{_datadir}/t1lib-0.8/afm/*
+%attr(-,root,root) %dir %{_datadir}/t1lib-0.8/type1
+%attr(-,root,root) %{_datadir}/t1lib-0.8/type1/*
+%attr(-,root,root) %dir %{_datadir}/t1lib-0.8/doc
+%attr(-,root,root) %doc %{_datadir}/t1lib-0.8/doc/*
 
 %files devel
 %attr(-,root,root) /usr/include/*
