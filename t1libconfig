@@ -64,7 +64,7 @@ done
 
 if [ $force -ne 1 ] && [ -e $dbase ]; then
 	echo "Configuration and font database files already exist."
-	echo "Run /usr/sbin/t1libconfig --force to rebuild them."
+	echo "Run $0 --force to rebuild them."
 	exit 0
 fi
 
