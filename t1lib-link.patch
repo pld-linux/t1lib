@@ -1,0 +1,20 @@
+--- t1lib-5.0.1/lib/Makefile.in.orig	2004-03-02 00:49:43.000000000 +0100
++++ t1lib-5.0.1/lib/Makefile.in	2004-03-02 00:57:04.186039952 +0100
+@@ -128,7 +128,7 @@
+ 
+ libt1.la: $(TYPE1_OBJS) $(T1LIB_OBJS)
+ 	$(LIBTOOL) --mode=link \
+-		$(CC) -o $@ $(TYPE1_OBJS) $(T1LIB_OBJS) \
++		$(CC) -o $@ $(TYPE1_OBJS) $(T1LIB_OBJS) -lm \
+ 	         -version-info @T1LIB_LT_CURRENT@:@T1LIB_LT_REVISION@:@T1LIB_LT_AGE@ \
+ 		 -rpath $(libdir)
+ 	cp t1lib/t1lib.h .
+@@ -136,7 +136,7 @@
+ 
+ libt1x.la: $(T1LIBX_OBJS)
+ 	$(LIBTOOL) --mode=link \
+-		$(CC) -o $@ $(T1LIBX_OBJS) \
++		$(CC) -o $@ $(T1LIBX_OBJS) libt1.la $(X_LIBS) -lX11 \
+ 	         -version-info @T1LIB_LT_CURRENT@:@T1LIB_LT_REVISION@:@T1LIB_LT_AGE@ \
+ 		 -rpath $(libdir)
+ 	cp t1lib/t1libx.h .
