@@ -173,7 +173,7 @@ Bibliotecas estáticas para desenvolvimento com t1lib
 
 %package xglyph
 Summary:	Test program for t1lib with X11 interface
-Summary:	Program testowy dla t1lib z interfejsem X11
+Summary(pl):	Program testowy dla t1lib z interfejsem X11
 Group:		X11/Applications
 Requires:	%{name}-devel = %{version}
 
