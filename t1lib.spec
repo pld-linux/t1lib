@@ -5,9 +5,12 @@ Release:	1
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
+Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
+Source1:	%{name}-fonts.Fontmap
+Source2:	%{name}-fonts.fonts.scale
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-doc.patch
 Patch2:		%{name}-config.patch
@@ -17,7 +20,9 @@ BuildRequires:	tetex
 BuildRequires:	tetex-latex
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_fontdir	/usr/share/fonts
+%define		_xbindir	/usr/X11R6/bin
+%define		_t1fontsdir	%{_fontsdir}/Type1
+%define		_t1afmdir	%{_t1fontsdir}/afm
 
 %description
 t1lib is a library distributed under the GNU General Public Library
@@ -57,7 +62,7 @@ Group:		X11/Fonts
 Group(de):	X11/Fonts
 Group(pl):	X11/Fonty
 Requires:	%{name} = %{version}
-Prereq:		type1inst >= 0.6.1
+Prereq:		textutils
 
 %description fonts
 Type 1 fonts.
@@ -73,7 +78,6 @@ Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
-Prereq:		type1inst
 
 %description devel
 The files needed for developing applications using t1lib.
@@ -93,7 +97,7 @@ Requires:	%{name}-devel = %{version}
 %description static
 Static libraries for t1lib.
 
-%description devel -l pl
+%description static -l pl
 Biblioteki statyczne dla t1lib.
 
 %package xglyph
@@ -125,32 +129,44 @@ autoconf
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_datadir},%{_bindir}} \
-	$RPM_BUILD_ROOT{%{_includedir},%{_fontdir}/Type1/afm} \
-	$RPM_BUILD_ROOT/usr/X11R6/bin
+	$RPM_BUILD_ROOT{%{_includedir},%{_xbindir}} \
+	$RPM_BUILD_ROOT{%{_t1fontsdir},%{_t1afmdir}}
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-install Fonts/afm/*.afm		$RPM_BUILD_ROOT%{_fontdir}/Type1/afm
-install Fonts/type1/*.pfb	$RPM_BUILD_ROOT%{_fontdir}/Type1
-cp -a Fonts/enc			$RPM_BUILD_ROOT%{_datadir}/%{name}
+cp -a Fonts/enc $RPM_BUILD_ROOT%{_datadir}/%{name}
+install Fonts/afm/*.afm $RPM_BUILD_ROOT%{_t1afmdir}
+install Fonts/type1/*.pfb $RPM_BUILD_ROOT%{_t1fontsdir}
+install %{SOURCE1} $RPM_BUILD_ROOT%{_t1fontsdir}/Fontmap.%{name}-fonts
+install %{SOURCE2} $RPM_BUILD_ROOT%{_t1fontsdir}/fonts.scale.%{name}-fonts
 
-mv -f $RPM_BUILD_ROOT%{_bindir}/xglyph $RPM_BUILD_ROOT/usr/X11R6/bin
+mv -f $RPM_BUILD_ROOT%{_bindir}/xglyph $RPM_BUILD_ROOT%{_xbindir}
 
 gzip -9nf Changes README.t1* doc/*.dvi
+
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %post 	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %post fonts
-cd %{_fontdir}/Type1
-/usr/bin/type1inst -nolog -q
+cd %{_t1fontsdir}
+cat fonts.scale.* | sort -u > fonts.scale.tmp
+wc -l fonts.scale.tmp > fonts.scale
+cat fonts.scale.tmp >> fonts.scale
+rm -f fonts.scale.tmp
+ln -sf fonts.scale fonts.dir
+cat Fontmap.* > Fontmap
 
 %postun fonts
-cd %{_fontdir}/Type1
-/usr/bin/type1inst -nolog -q
-
-%clean
-rm -rf $RPM_BUILD_ROOT
+cd %{_t1fontsdir}
+cat fonts.scale.* 2>/dev/null | sort -u > fonts.scale.tmp
+wc -l fonts.scale.tmp > fonts.scale
+cat fonts.scale.tmp >> fonts.scale
+rm -f fonts.scale.tmp
+ln -sf fonts.scale fonts.dir
+cat Fontmap.* > Fontmap 2>/dev/null
 
 %files
 %defattr(644,root,root,755)
@@ -167,8 +183,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files fonts
 %defattr(644,root,root,755)
-%{_fontdir}/Type1/afm/*
-%{_fontdir}/Type1/*.pfb
+%{_t1fontsdir}/*.pfb
+%{_t1afmdir}/*.afm
+%{_t1fontsdir}/*.%{name}-fonts
 
 %files devel
 %defattr(644,root,root,755)
@@ -182,4 +199,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files xglyph
 %defattr(644,root,root,755)
-%attr(755,root,root) /usr/X11R6/bin/xglyph
+%attr(755,root,root) %{_xbindir}/xglyph
