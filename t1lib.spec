@@ -9,6 +9,7 @@ Release:	4
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
+# Source0-md5:	bce5051f2ad068af49d44cf6203e22ce
 Source1:	%{name}-fonts.Fontmap
 Source2:	%{name}-fonts.fonts.scale
 Patch0:		%{name}-DESTDIR.patch
