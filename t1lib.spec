@@ -9,7 +9,7 @@ Summary(ru):	Растеризатор шрифтов Type 1
 Summary(uk):	Растеризатор шрифт╕в Type 1
 Name:		t1lib
 Version:	5.0.0
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
@@ -34,9 +34,10 @@ BuildRequires:	tetex-makeindex
 BuildRequires:	tetex-format-latex
 BuildRequires:	tetex-tex-babel
 %endif
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Requires(post):	fontpostinst >= 0.1-6
 Obsoletes:	libt1lib1.3.1
 Obsoletes:	libt1lib1.3.1-progs
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_xbindir	/usr/X11R6/bin
 %define		_t1fontsdir	%{_fontsdir}/Type1
@@ -122,8 +123,7 @@ T1lib - це б╕бл╕отека для створенння гл╕ф╕в символ╕в та ланцюжк╕в
 Summary:	Type 1 fonts
 Summary(pl):	Fonty Type 1
 Group:		X11/Fonts
-Requires(post,postun):	fileutils
-Requires(post,postun):	textutils
+Requires(post,postun):	fontpostinst >= 0.1-6
 
 %description fonts
 Type 1 fonts.
@@ -138,7 +138,7 @@ Summary(pt_BR):	Arquivos de inclusЦo e bibliotecas para o desenvolvimento com a 
 Summary(ru):	Растеризатор шрифтов Type 1 - файлы для разработки программ
 Summary(uk):	Растеризатор шрифт╕в Type 1 - файли для розробки програм
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Obsoletes:	libt1lib1.3.1-devel
 
 %description devel
@@ -162,7 +162,7 @@ Summary:	Static libraries for t1lib
 Summary(pl):	Biblioteki statyczne dla t1lib
 Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com t1lib
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static libraries for t1lib.
@@ -183,7 +183,7 @@ Bibliotecas estАticas para desenvolvimento com t1lib
 Summary:	Test program for t1lib with X11 interface
 Summary(pl):	Program testowy dla t1lib z interfejsem X11
 Group:		X11/Applications
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description xglyph
 Test program for t1lib with X11 interface.
@@ -238,30 +238,17 @@ mv -f $RPM_BUILD_ROOT%{_bindir}/xglyph $RPM_BUILD_ROOT%{_xbindir}
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig
+%post
+/sbin/ldconfig
+fontpostinst Type1
+
 %postun -p /sbin/ldconfig
 
 %post fonts
-umask 022
-cd %{_t1fontsdir}
-rm -f fonts.scale.bak Fontmap.bak
-cat fonts.scale.* | sort -u > fonts.scale.tmp
-cat fonts.scale.tmp | wc -l | tr -d ' ' > fonts.scale
-cat fonts.scale.tmp >> fonts.scale
-rm -f fonts.scale.tmp
-ln -sf fonts.scale fonts.dir
-cat Fontmap.* > Fontmap
+fontpostinst Type1
 
 %postun fonts
-umask 022
-cd %{_t1fontsdir}
-rm -f fonts.scale.bak Fontmap.bak
-cat fonts.scale.* 2>/dev/null | sort -u > fonts.scale.tmp
-cat fonts.scale.tmp | wc -l | tr -d ' ' > fonts.scale
-cat fonts.scale.tmp >> fonts.scale
-rm -f fonts.scale.tmp
-ln -sf fonts.scale fonts.dir
-cat Fontmap.* > Fontmap 2>/dev/null
+fontpostinst Type1
 
 %files
 %defattr(644,root,root,755)
@@ -278,8 +265,8 @@ cat Fontmap.* > Fontmap 2>/dev/null
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/enc
 
-%config(noreplace) %{_datadir}/%{name}/t1lib.config
-%config(noreplace) %{_datadir}/%{name}/FontDatabase
+%ghost %{_datadir}/%{name}/t1lib.config
+%ghost %{_datadir}/%{name}/FontDatabase
 
 %{_mandir}/man[58]/*
 %{_mandir}/man1/type1afm.1*
