@@ -1,4 +1,5 @@
 Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts
+Summary(pl):	Biblioteka znakowych i ³añcuchowych glifów z fontów Adobe Type 1
 Name:		t1lib
 Version:	1.2
 Release:	1
@@ -8,6 +9,9 @@ Group(de):	Libraries
 Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	âÉÂÌÉÏÔÅËÉ
+Group(uk):	â¦ÂÌ¦ÏÔÅËÉ
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
 Source1:	%{name}-fonts.Fontmap
 Source2:	%{name}-fonts.fonts.scale
@@ -15,8 +19,8 @@ Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-doc.patch
 Patch2:		%{name}-config.patch
 URL:		http://www.windowmaker.org/
+BuildRequires:	autoconf
 BuildRequires:	XFree86-devel
-BuildRequires:	tetex
 BuildRequires:	tetex-latex
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -52,8 +56,35 @@ of the features:
 - antialiasing is implemented using three gray-levels between black
   and white
 - An interactive test program called "xglyph" is included in the
-  distribution. This program allows to test all of the features of the
-  library. It requires X11.
+  distribution (as separate package). This program allows to test all of
+  the features of the library. It requires X11.
+
+%description -l pl
+t1lib jest wypuszczon± na LGPL bibliotek± do generowania znakowych i
+³añcuchowych glifów z fontów Adobe Type 1. t1lib u¿ywa wiêkszo¶ci kodu
+rasteryzera X11 (wspomaganego przez IBM), ale niektóre wady tego
+rasteryzera zosta³y usuniête. Niektóre cechy t1lib:
+- ca³kowita niezale¿no¶æ od X11 (tylko program dostarczony do testów
+  wymaga X11)
+- fonty s± znane bibliotece poprzez dodanie do pliku z baz± danych o
+  fontach - w czasie uruchamiania
+- ¶cie¿ki wyszukiwania wszystkich plików wej¶ciowych s± konfigurowalne
+  w czasie uruchamiania
+- znaki s± rasteryzowane kiedy s± potrzebne
+- znaki i ca³kowite ³añcuchy mog± byæ zrasteryzowane prostym
+  wywo³aniem funkcji
+- przy rasteryzacji ³añcuchów opcjonalnie mog± byæ brane pod uwagê
+  informacje o kerningu z plików .afm
+- interfejs do informacji o ligaturach z plików .afm
+- do³±czony program do generowania plików .afm z fontów Type 1
+- obroty o dowolny k±t
+- wsparcie do rozszerzania i pochylania znaków
+- wsparcie dla podkre¶lania, nadkre¶lania, przekre¶lania
+- nowe wektory kodowania mog± byæ wczytane w czasie dzia³ania i fonty
+  mog± byæ ponownie zakodowane przy u¿yciu tych wektorów
+- antyaliasing zaimplementowany przy u¿yciu trzech stopni szaaro¶ci
+  pomiêdzy czerni± a biel±
+- interaktywny program testowy xglyph - w osobnym pakiecie (wymaga X).
 
 %package fonts
 Summary:	Type 1 fonts
@@ -76,8 +107,12 @@ Summary:	Development files for t1lib
 Summary(pl):	Pliki nag³ówkowe i biblioteki dla t1lib
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name} = %{version}
 
 %description devel
@@ -91,8 +126,12 @@ Summary:	Static libraries for t1lib
 Summary(pl):	Biblioteki statyczne dla t1lib
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name}-devel = %{version}
 
 %description static
