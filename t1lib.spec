@@ -5,13 +5,6 @@ Version:	1.3.1
 Release:	1
 License:	LGPL
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
 Source1:	%{name}-fonts.Fontmap
 Source2:	%{name}-fonts.fonts.scale
@@ -94,8 +87,6 @@ rasteryzera zostaЁy usuniЙte. NiektСre cechy t1lib:
 Summary:	Type 1 fonts
 Summary(pl):	Fonty Type 1
 Group:		X11/Fonts
-Group(de):	X11/Fonts
-Group(pl):	X11/Fonty
 Requires:	%{name} = %{version}
 Prereq:		textutils
 Prereq:		sed
@@ -110,13 +101,6 @@ Zestaw fontСw Type 1.
 Summary:	Development files for t1lib
 Summary(pl):	Pliki nagЁСwkowe i biblioteki dla t1lib
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -129,13 +113,6 @@ Pliki niezbЙdne do tworzenia aplikacji z wykorzystaniem t1lib.
 Summary:	Static libraries for t1lib
 Summary(pl):	Biblioteki statyczne dla t1lib
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -148,8 +125,6 @@ Biblioteki statyczne dla t1lib.
 Summary:	Test program for t1lib with X11 interface
 Summary:	Program testowy dla t1lib z interfejsem X11
 Group:		X11/Applications
-Group(de):	X11/Applikationen
-Group(pl):	X11/Aplikacje
 Requires:	%{name}-devel = %{version}
 
 %description xglyph
