@@ -8,12 +8,12 @@ Summary(pt_BR):	Rasterizador de fontes Type 1
 Summary(ru):	Растеризатор шрифтов Type 1
 Summary(uk):	Растеризатор шрифт╕в Type 1
 Name:		t1lib
-Version:	5.0.0
-Release:	4
+Version:	5.0.1
+Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
-# Source0-md5: 6b5d79840ec2be72b506c12abb040a60
+# Source0-md5:	b4e14bc4bf322c88da41a98f73c19b98
 Source1:	%{name}-fonts.Fontmap
 Source2:	%{name}-fonts.fonts.scale
 Source3:	%{name}config
@@ -21,9 +21,10 @@ Source4:	%{name}config.8
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-doc.patch
 Patch2:		%{name}-config.patch
-Patch4:		%{name}-KernMapSize.patch
-Patch5:		%{name}-man.patch
-Patch7:		%{name}-xglyph.patch
+Patch3:		%{name}-KernMapSize.patch
+Patch4:		%{name}-man.patch
+Patch5:		%{name}-xglyph.patch
+Patch6:		%{name}-link.patch
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -40,7 +41,6 @@ Obsoletes:	libt1lib1.3.1
 Obsoletes:	libt1lib1.3.1-progs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_xbindir	/usr/X11R6/bin
 %define		_t1fontsdir	%{_fontsdir}/Type1
 %define		_t1afmdir	%{_t1fontsdir}/afm
 %define		_datadir	/etc
@@ -199,9 +199,10 @@ Program testowy dla t1lib z interfejsem X11.
 %patch0 -p1
 %patch1 -p0
 %patch2 -p0
+%patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%patch7 -p1
+%patch6 -p1
 
 %build
 %{__libtoolize}
@@ -214,12 +215,12 @@ mv -f aclocal.m4 ac-tools
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_datadir},%{_bindir}} \
-	$RPM_BUILD_ROOT{%{_includedir},%{_xbindir}} \
+install -d $RPM_BUILD_ROOT{%{_libdir},%{_datadir},%{_bindir},%{_includedir}} \
 	$RPM_BUILD_ROOT{%{_t1fontsdir},%{_t1afmdir}} \
 	$RPM_BUILD_ROOT%{_mandir}/man{1,5,8}
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 cp -a Fonts/enc $RPM_BUILD_ROOT%{_datadir}/%{name}
 install Fonts/afm/*.afm $RPM_BUILD_ROOT%{_t1afmdir}
@@ -235,8 +236,6 @@ for sec in 1 5; do
 	install debian/*.${sec} $RPM_BUILD_ROOT%{_mandir}/man${sec}
 done
 install %{SOURCE4} $RPM_BUILD_ROOT%{_mandir}/man8
-
-mv -f $RPM_BUILD_ROOT%{_bindir}/xglyph $RPM_BUILD_ROOT%{_xbindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -292,5 +291,5 @@ fontpostinst Type1
 
 %files xglyph
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_xbindir}/xglyph
+%attr(755,root,root) %{_bindir}/xglyph
 %{_mandir}/man1/xglyph.1*
