@@ -4,9 +4,7 @@ Version:	0.9
 Release:	1
 Group:		Libraries
 Copyright:	GPL
-Vendor:		«unknown»
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
-Patch0:		t1lib-0.7.1-beta-config.patch
 URL:		http://www.windowmaker.org/
 BuildRoot:	/tmp/%{name}-%{version}-root
 
@@ -57,14 +55,22 @@ X11 have been eliminated. Here are some of the features:
 %package devel
 Summary:	Development files for t1lib
 Group:		Development/Libraries
-Require:	%{name} = %{version}
+Requires:	%{name} = %{version}
 
 %description devel
 The files needed for developing applications using t1lib.
 
+%package static
+Summary:	Static library for t1lib
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}
+
+%description static
+The files needed for developing applications using t1lib.
+
 %prep
 %setup -n T1-%{version}
-%patch0 -p1
+#%patch0 -p1
 
 %build
 CFLAGS=$RPM_OPT_FLAGS ./configure --prefix=/usr
@@ -74,29 +80,37 @@ make
 if [ -d $RPM_BUILD_ROOT ]; then rm -r $RPM_BUILD_ROOT; fi
 mkdir -p $RPM_BUILD_ROOT/usr/{lib,share,bin,include}
 make prefix=$RPM_BUILD_ROOT/usr install
-cp -fr Fonts/* $RPM_BUILD_ROOT%{_datadir}/t1lib-0.8
+
+cp -fr Fonts/* $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}
+
 CFLAGS=$RPM_OPT_FLAGS ./configure --prefix=/usr --with-static-lib
 make
+
+gzip -9nf Changes README.%{name}-%{version} doc/*
 
 %clean
 rm -r $RPM_BUILD_ROOT
 
 %files
-%doc Changes LGPL LICENSE README.t1lib-0.8-beta doc/*
-%attr(-,root,root) %{_bindir}/*
-%attr(-,root,root) %{_libdir}/*.so.*
-%attr(-,root,root) %dir %{_datadir}/t1lib-0.8
-%attr(-,root,root) %config %{_datadir}/t1lib-0.8/t1lib.config
-%attr(-,root,root) %dir %{_datadir}/t1lib-0.8/enc
-%attr(-,root,root) %{_datadir}/t1lib-0.8/enc/*
-%attr(-,root,root) %dir %{_datadir}/t1lib-0.8/afm
-%attr(-,root,root) %{_datadir}/t1lib-0.8/afm/*
-%attr(-,root,root) %dir %{_datadir}/t1lib-0.8/type1
-%attr(-,root,root) %{_datadir}/t1lib-0.8/type1/*
-%attr(-,root,root) %dir %{_datadir}/t1lib-0.8/doc
-%attr(-,root,root) %doc %{_datadir}/t1lib-0.8/doc/*
+%defattr(644,root,root,755)
+%doc {Changes,README.%{name}-%{version},doc/*}.gz
+%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_libdir}/*.so.*
+%dir %{_datadir}/%{name}-%{version}
+%dir %{_datadir}/%{name}-%{version}/enc
+%dir %{_datadir}/%{name}-%{version}/afm
+%dir %{_datadir}/%{name}-%{version}/type1
+%dir %{_datadir}/%{name}-%{version}/doc
+%config %{_datadir}/%{name}-%{version}/t1lib.config
+%{_datadir}/%{name}-%{version}/enc/*
+%{_datadir}/%{name}-%{version}/afm/*
+%{_datadir}/%{name}-%{version}/type1/*
+%doc %{_datadir}/%{name}-%{version}/doc/*
 
 %files devel
-%attr(-,root,root) %{_includedir}/*
-%attr(-,root,root) %{_libdir}/*.a
-%attr(-,root,root) %{_libdir}/*.so
+%{_includedir}/*
+%{_libdir}/*.so
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/*.a
