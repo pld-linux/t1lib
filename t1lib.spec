@@ -30,6 +30,8 @@ BuildRequires:	libtool
 BuildRequires:	tetex-dvips
 BuildRequires:	tetex-latex
 BuildRequires:	tetex-makeindex
+BuildRequires:	tetex-format-latex
+BuildRequires:	tetex-tex-babel
 %endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	libt1lib1.3.1
