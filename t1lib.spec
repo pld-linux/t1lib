@@ -1,15 +1,14 @@
 Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts.
 Name:		t1lib
-Version:	0.9.2
+Version:	1.0.1
 Release:	1
+License:	LGPL
 Group:		Libraries
 Group(pl):	Biblioteki
-License:	LGPL
 Source:		ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
 Patch0:		t1lib-DESTDIR.patch
 Patch1:		t1lib-doc.patch
-Patch2:		t1lib-datadir.patch
-Patch3:		t1lib-config.patch
+Patch2:		t1lib-config.patch
 URL:		http://www.windowmaker.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	tetex
@@ -90,10 +89,9 @@ Biblioteki statyczne dla t1lib.
 
 %prep
 %setup -q -n T1-%{version}
-%patch0 -p0
+%patch0 -p1
 %patch1 -p0
 %patch2 -p0
-%patch3 -p0
 
 %build
 autoconf
@@ -113,8 +111,9 @@ install Fonts/afm/*.afm		$RPM_BUILD_ROOT%{_fontdir}/Type1/afm
 install Fonts/type1/*.pfb	$RPM_BUILD_ROOT%{_fontdir}/Type1
 cp -a Fonts/enc			$RPM_BUILD_ROOT%{_datadir}/%{name}
 
-gzip -9nf Changes README.t1* doc/*.dvi
+strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/*.so.*.*
 
+gzip -9nf Changes README.t1* doc/*.dvi
 
 %post 	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
