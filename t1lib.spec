@@ -97,7 +97,7 @@ rm -r $RPM_BUILD_ROOT
 %attr(-,root,root) %doc %{_datadir}/t1lib-0.8/doc/*
 
 %files devel
-%attr(-,root,root) /usr/include/*
+%attr(-,root,root) %{_includedir}/*
 %attr(-,root,root) %{_libdir}/*.a
 %attr(-,root,root) %{_libdir}/*.so
 
