@@ -1,11 +1,12 @@
 Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts.
 Name:		t1lib
 Version:	1.0.1
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
+Group(fr):	Librairies
 Group(pl):	Biblioteki
-Source:		ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
+Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
 Patch0:		t1lib-DESTDIR.patch
 Patch1:		t1lib-doc.patch
 Patch2:		t1lib-config.patch
@@ -18,17 +19,18 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_fontdir	/usr/share/fonts
 
 %description
-t1lib is a library distributed under the GNU General Public Library License
-for generating character- and string-glyphs from Adobe Type 1 fonts under
-UNIX. t1lib uses most of the code of the X11 rasterizer donated by IBM to
-the X11-project. But some disadvantages of the rasterizer being included in
-X11 have been eliminated. Here are some of the features:
-- t1lib is completely independent of X11 (although the program provided for
-  testing the library needs X11)
+t1lib is a library distributed under the GNU General Public Library
+License for generating character- and string-glyphs from Adobe Type 1
+fonts under UNIX. t1lib uses most of the code of the X11 rasterizer
+donated by IBM to the X11-project. But some disadvantages of the
+rasterizer being included in X11 have been eliminated. Here are some
+of the features:
+- t1lib is completely independent of X11 (although the program
+  provided for testing the library needs X11)
 - fonts are made known to library by means of a font database file at
   runtime
-- searchpaths for all types of input files are configured by means of a
-  configuration file at runtime
+- searchpaths for all types of input files are configured by means of
+  a configuration file at runtime
 - characters are rastered as they are needed
 - characters and complete strings may be rastered by a simple function
   call
@@ -40,9 +42,9 @@ X11 have been eliminated. Here are some of the features:
 - there's support for extending and slanting fonts
 - underlining, overlining and overstriking is supported
 - new encoding vectors may be loaded at runtime and fonts may be
-  reencoded using these encoding vectors 
-- antialiasing is implemented using three gray-levels between black and
-  white
+  reencoded using these encoding vectors
+- antialiasing is implemented using three gray-levels between black
+  and white
 - An interactive test program called "xglyph" is included in the
   distribution. This program allows to test all of the features of the
   library. It requires X11.
@@ -65,6 +67,7 @@ Zestaw fontów Type 1.
 Summary:	Development files for t1lib
 Summary(pl):	Pliki nag³ówkowe i biblioteki dla t1lib
 Group:		Development/Libraries
+Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
 
@@ -78,6 +81,7 @@ Pliki niezbêdne do tworzenia aplikacji z wykorzystaniem t1lib.
 Summary:	Static libraries for t1lib
 Summary(pl):	Biblioteki statyczne dla t1lib
 Group:		Development/Libraries
+Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
 
@@ -120,11 +124,11 @@ gzip -9nf Changes README.t1* doc/*.dvi
 
 %post fonts
 cd %{_fontdir}/Type1
-/usr/bin/type1inst -nogs -nolog
+%attr(755,root,root) %{_bindir}/type1inst -nogs -nolog
 
 %postun fonts
 cd %{_fontdir}/Type1
-/usr/bin/type1inst -nogs -nolog
+%attr(755,root,root) %{_bindir}/type1inst -nogs -nolog
 
 %clean
 rm -r $RPM_BUILD_ROOT
