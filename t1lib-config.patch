@@ -1,0 +1,15 @@
+--- lib/t1lib.config~	Tue Feb 23 17:50:14 1999
++++ lib/t1lib.config	Thu Nov 25 02:40:17 1999
+@@ -2,7 +2,8 @@
+ Note that it is not of any use if not setup by the system administrator.
+ 
+ For information on how to set up these things see the t1lib-manual.
+-      
+-ENCODING=.
+-AFM=.
+-TYPE1=.
++
++ENCODING=./enc
++AFM=/usr/share/fonts/Type1/afm
++TYPE1=/usr/share/fonts/Type1
++#FONTDATABASE=
