@@ -9,9 +9,9 @@ Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
 URL:		http://www.windowmaker.org/
 Patch0:		t1lib-DESTDIR.patch
 Patch1:		t1lib-doc.patch
-BuildPrereq:	XFree86-devel
-BuildPrereq:	tetex
-BuildPrereq:	tetex-latex
+BuildRequires:	XFree86-devel
+BuildRequires:	tetex
+BuildRequires:	tetex-latex
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
