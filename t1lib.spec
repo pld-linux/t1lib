@@ -1,7 +1,7 @@
 Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts
 Name:		t1lib
 Version:	1.0.1
-Release:	5
+Release:	6
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
@@ -54,6 +54,7 @@ of the features:
 Summary:	Type 1 fonts
 Summary(pl):	Fonty Type 1
 Group:		X11/Fonts
+Group(de):	X11/Fonts
 Group(pl):	X11/Fonty
 Requires:	%{name} = %{version}
 Prereq:		type1inst >= 0.6.1
@@ -134,8 +135,6 @@ install Fonts/type1/*.pfb	$RPM_BUILD_ROOT%{_fontdir}/Type1
 cp -a Fonts/enc			$RPM_BUILD_ROOT%{_datadir}/%{name}
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/xglyph $RPM_BUILD_ROOT/usr/X11R6/bin
-
-strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/*.so.*.*
 
 gzip -9nf Changes README.t1* doc/*.dvi
 
