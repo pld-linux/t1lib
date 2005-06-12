@@ -9,12 +9,12 @@ Summary(pt_BR):	Rasterizador de fontes Type 1
 Summary(ru):	Растеризатор шрифтов Type 1
 Summary(uk):	Растеризатор шрифт╕в Type 1
 Name:		t1lib
-Version:	5.0.2
+Version:	5.1.0
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
-# Source0-md5:	cc5d4130b25bb8a1c930488b78930e9b
+# Source0-md5:	a05bed4aa63637052e60690ccde70421
 Source1:	%{name}-fonts.Fontmap
 Source2:	%{name}-fonts.fonts.scale
 Source3:	%{name}config
@@ -26,6 +26,7 @@ Patch3:		%{name}-KernMapSize.patch
 Patch4:		%{name}-man.patch
 Patch5:		%{name}-xglyph.patch
 Patch6:		%{name}-link.patch
+Patch7:		%{name}-aclocal.patch
 %if %{with xlibs}
 BuildRequires:	libXaw-devel
 %else
@@ -208,11 +209,13 @@ Program testowy dla t1lib z interfejsem X11.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
+
+rm -f ac-tools/aclocal.m4
 
 %build
 %{__libtoolize}
-%{__aclocal}
-mv -f aclocal.m4 ac-tools
+%{__aclocal} -I ac-tools
 %{__autoconf}
 %configure
 
