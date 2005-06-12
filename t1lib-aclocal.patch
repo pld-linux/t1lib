@@ -1,0 +1,10 @@
+--- t1lib-5.1.0/configure.in.orig	2005-05-18 05:15:38.000000000 +0200
++++ t1lib-5.1.0/configure.in	2005-06-12 22:17:14.151913144 +0200
+@@ -77,7 +77,5 @@
+ 
+ dnl We use this file by Andreas Zeller to check for libXaw
+-builtin(include, ac-tools/ice_find_athena.m4)
+-builtin(include, ac-tools/aclocal.m4)
+ 
+ dnl We want these before the checks, so the checks can modify their values.
+ test -z "$LDLIBS" && LDLIBS=-lm   AC_SUBST(LDLIBS)
