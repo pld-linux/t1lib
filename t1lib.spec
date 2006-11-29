@@ -1,7 +1,6 @@
 #
 # Conditional build:
 %bcond_without	doc	# do not build documentation with LaTeX
-%bcond_with	xlibs	# build with xlibs instead of XFree86
 #
 Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts
 Summary(pl):	Biblioteka znakowych i ³añcuchowych glifów z fontów Adobe Type 1
@@ -10,7 +9,7 @@ Summary(ru):	òÁÓÔÅÒÉÚÁÔÏÒ ÛÒÉÆÔÏ× Type 1
 Summary(uk):	òÁÓÔÅÒÉÚÁÔÏÒ ÛÒÉÆÔ¦× Type 1
 Name:		t1lib
 Version:	5.1.0
-Release:	2
+Release:	3
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
@@ -27,19 +26,18 @@ Patch4:		%{name}-man.patch
 Patch5:		%{name}-xglyph.patch
 Patch6:		%{name}-link.patch
 Patch7:		%{name}-aclocal.patch
-%if %{with xlibs}
-BuildRequires:	libXaw-devel
-%else
-BuildRequires:	XFree86-devel
-%endif
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	libXaw-devel
 BuildRequires:	libtool
+BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXaw-devel
+BuildRequires:	xorg-lib-libXt-devel
 %if %{with doc}
 BuildRequires:	tetex-dvips
+BuildRequires:	tetex-format-latex
 BuildRequires:	tetex-latex
 BuildRequires:	tetex-makeindex
-BuildRequires:	tetex-format-latex
 BuildRequires:	tetex-tex-babel
 %endif
 Requires(post):	fontpostinst >= 0.1-6
@@ -50,7 +48,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_t1fontsdir	%{_fontsdir}/Type1
 %define		_t1afmdir	%{_t1fontsdir}/afm
 %define		_datadir	/etc
-%define		specflags_ia32	 -fomit-frame-pointer 
+%define		specflags_ia32	 -fomit-frame-pointer
 
 %description
 t1lib is a library distributed under the GNU General Public Library
