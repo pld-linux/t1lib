@@ -28,7 +28,6 @@ Patch6:		%{name}-link.patch
 Patch7:		%{name}-aclocal.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	libXaw-devel
 BuildRequires:	libtool
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXaw-devel
