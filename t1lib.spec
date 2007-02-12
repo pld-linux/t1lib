@@ -3,10 +3,10 @@
 %bcond_without	doc	# do not build documentation with LaTeX
 #
 Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts
-Summary(pl):	Biblioteka znakowych i ЁaЯcuchowych glifСw z fontСw Adobe Type 1
-Summary(pt_BR):	Rasterizador de fontes Type 1
-Summary(ru):	Растеризатор шрифтов Type 1
-Summary(uk):	Растеризатор шрифт╕в Type 1
+Summary(pl.UTF-8):   Biblioteka znakowych i е┌aе└cuchowych glifцЁw z fontцЁw Adobe Type 1
+Summary(pt_BR.UTF-8):   Rasterizador de fontes Type 1
+Summary(ru.UTF-8):   п═п╟я│я┌п╣я─п╦п╥п╟я┌п╬я─ я┬я─п╦я└я┌п╬п╡ Type 1
+Summary(uk.UTF-8):   п═п╟я│я┌п╣я─п╦п╥п╟я┌п╬я─ я┬я─п╦я└я┌я√п╡ Type 1
 Name:		t1lib
 Version:	5.1.0
 Release:	3
@@ -80,53 +80,53 @@ of the features:
   distribution (as separate package). This program allows to test all of
   the features of the library. It requires X11.
 
-%description -l pl
-t1lib jest wypuszczon╠ na LGPL bibliotek╠ do generowania znakowych i
-ЁaЯcuchowych glifСw z fontСw Adobe Type 1. t1lib u©ywa wiЙkszo╤ci kodu
-rasteryzera X11 (wspomaganego przez IBM), ale niektСre wady tego
-rasteryzera zostaЁy usuniЙte. NiektСre cechy t1lib:
-- caЁkowita niezale©no╤Ф od X11 (tylko program dostarczony do testСw
+%description -l pl.UTF-8
+t1lib jest wypuszczonд┘ na LGPL bibliotekд┘ do generowania znakowych i
+е┌aе└cuchowych glifцЁw z fontцЁw Adobe Type 1. t1lib uе╪ywa wiд≥kszoе⌡ci kodu
+rasteryzera X11 (wspomaganego przez IBM), ale niektцЁre wady tego
+rasteryzera zostaе┌y usuniд≥te. NiektцЁre cechy t1lib:
+- caе┌kowita niezaleе╪noе⌡д┤ od X11 (tylko program dostarczony do testцЁw
   wymaga X11)
-- fonty s╠ znane bibliotece poprzez dodanie do pliku z baz╠ danych o
+- fonty sд┘ znane bibliotece poprzez dodanie do pliku z bazд┘ danych o
   fontach - w czasie uruchamiania
-- ╤cie©ki wyszukiwania wszystkich plikСw wej╤ciowych s╠ konfigurowalne
+- е⌡cieе╪ki wyszukiwania wszystkich plikцЁw wejе⌡ciowych sд┘ konfigurowalne
   w czasie uruchamiania
-- znaki s╠ rasteryzowane kiedy s╠ potrzebne
-- znaki i caЁkowite ЁaЯcuchy mog╠ byФ zrasteryzowane prostym
-  wywoЁaniem funkcji
-- przy rasteryzacji ЁaЯcuchСw opcjonalnie mog╠ byФ brane pod uwagЙ
-  informacje o kerningu z plikСw .afm
-- interfejs do informacji o ligaturach z plikСw .afm
-- doЁ╠czony program do generowania plikСw .afm z fontСw Type 1
-- obroty o dowolny k╠t
-- wsparcie do rozszerzania i pochylania znakСw
-- wsparcie dla podkre╤lania, nadkre╤lania, przekre╤lania
-- nowe wektory kodowania mog╠ byФ wczytane w czasie dziaЁania i fonty
-  mog╠ byФ ponownie zakodowane przy u©yciu tych wektorСw
-- antyaliasing zaimplementowany przy u©yciu trzech stopni szaro╤ci
-  pomiЙdzy czerni╠ a biel╠
+- znaki sд┘ rasteryzowane kiedy sд┘ potrzebne
+- znaki i caе┌kowite е┌aе└cuchy mogд┘ byд┤ zrasteryzowane prostym
+  wywoе┌aniem funkcji
+- przy rasteryzacji е┌aе└cuchцЁw opcjonalnie mogд┘ byд┤ brane pod uwagд≥
+  informacje o kerningu z plikцЁw .afm
+- interfejs do informacji o ligaturach z plikцЁw .afm
+- doе┌д┘czony program do generowania plikцЁw .afm z fontцЁw Type 1
+- obroty o dowolny kд┘t
+- wsparcie do rozszerzania i pochylania znakцЁw
+- wsparcie dla podkreе⌡lania, nadkreе⌡lania, przekreе⌡lania
+- nowe wektory kodowania mogд┘ byд┤ wczytane w czasie dziaе┌ania i fonty
+  mogд┘ byд┤ ponownie zakodowane przy uе╪yciu tych wektorцЁw
+- antyaliasing zaimplementowany przy uе╪yciu trzech stopni szaroе⌡ci
+  pomiд≥dzy czerniд┘ a bielд┘
 - interaktywny program testowy xglyph - w osobnym pakiecie (wymaga X).
 
-%description -l pt_BR
+%description -l pt_BR.UTF-8
 Rasterizador de fontes Type 1 da Adobe.
 
-%description -l ru
-T1lib - это библиотека для создания глифов символов и цепочек символов
-из шрифтов Adobe Type 1. T1lib использует код растеризатора для X11
-подаренного фирмой IBM проекту X11. Но некоторые недостатки
-включенного в X11 растеризатора были устранены. T1lib включает также
-поддержку антиалиасинга.
+%description -l ru.UTF-8
+T1lib - я█я┌п╬ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╟ п╢п╩я▐ я│п╬п╥п╢п╟п╫п╦я▐ пЁп╩п╦я└п╬п╡ я│п╦п╪п╡п╬п╩п╬п╡ п╦ я├п╣п©п╬я┤п╣п╨ я│п╦п╪п╡п╬п╩п╬п╡
+п╦п╥ я┬я─п╦я└я┌п╬п╡ Adobe Type 1. T1lib п╦я│п©п╬п╩я▄п╥я┐п╣я┌ п╨п╬п╢ я─п╟я│я┌п╣я─п╦п╥п╟я┌п╬я─п╟ п╢п╩я▐ X11
+п©п╬п╢п╟я─п╣п╫п╫п╬пЁп╬ я└п╦я─п╪п╬п╧ IBM п©я─п╬п╣п╨я┌я┐ X11. п²п╬ п╫п╣п╨п╬я┌п╬я─я▀п╣ п╫п╣п╢п╬я│я┌п╟я┌п╨п╦
+п╡п╨п╩я▌я┤п╣п╫п╫п╬пЁп╬ п╡ X11 я─п╟я│я┌п╣я─п╦п╥п╟я┌п╬я─п╟ п╠я▀п╩п╦ я┐я│я┌я─п╟п╫п╣п╫я▀. T1lib п╡п╨п╩я▌я┤п╟п╣я┌ я┌п╟п╨п╤п╣
+п©п╬п╢п╢п╣я─п╤п╨я┐ п╟п╫я┌п╦п╟п╩п╦п╟я│п╦п╫пЁп╟.
 
-%description -l uk
-T1lib - це б╕бл╕отека для створенння гл╕ф╕в символ╕в та ланцюжк╕в
-символ╕в з шрифт╕в Adobe Type 1. T1lib використову╓ код растеризатора
-для X11 подарованого ф╕рмою IBM проекту X11. Але деяк╕ недол╕ки
-включеного в X11 растеризатора були прибран╕. T1lib також включа╓
-п╕дтримку антиал╕асинга.
+%description -l uk.UTF-8
+T1lib - я├п╣ п╠я√п╠п╩я√п╬я┌п╣п╨п╟ п╢п╩я▐ я│я┌п╡п╬я─п╣п╫п╫п╫я▐ пЁп╩я√я└я√п╡ я│п╦п╪п╡п╬п╩я√п╡ я┌п╟ п╩п╟п╫я├я▌п╤п╨я√п╡
+я│п╦п╪п╡п╬п╩я√п╡ п╥ я┬я─п╦я└я┌я√п╡ Adobe Type 1. T1lib п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐я■ п╨п╬п╢ я─п╟я│я┌п╣я─п╦п╥п╟я┌п╬я─п╟
+п╢п╩я▐ X11 п©п╬п╢п╟я─п╬п╡п╟п╫п╬пЁп╬ я└я√я─п╪п╬я▌ IBM п©я─п╬п╣п╨я┌я┐ X11. п░п╩п╣ п╢п╣я▐п╨я√ п╫п╣п╢п╬п╩я√п╨п╦
+п╡п╨п╩я▌я┤п╣п╫п╬пЁп╬ п╡ X11 я─п╟я│я┌п╣я─п╦п╥п╟я┌п╬я─п╟ п╠я┐п╩п╦ п©я─п╦п╠я─п╟п╫я√. T1lib я┌п╟п╨п╬п╤ п╡п╨п╩я▌я┤п╟я■
+п©я√п╢я┌я─п╦п╪п╨я┐ п╟п╫я┌п╦п╟п╩я√п╟я│п╦п╫пЁп╟.
 
 %package fonts
 Summary:	Type 1 fonts
-Summary(pl):	Fonty Type 1
+Summary(pl.UTF-8):   Fonty Type 1
 Group:		Fonts
 Requires(post,postun):	fontpostinst >= 0.1-6
 Requires:	%{_fontsdir}/Type1
@@ -134,15 +134,15 @@ Requires:	%{_fontsdir}/Type1
 %description fonts
 Type 1 fonts.
 
-%description fonts -l pl
-Zestaw fontСw Type 1.
+%description fonts -l pl.UTF-8
+Zestaw fontцЁw Type 1.
 
 %package devel
 Summary:	Development files for t1lib
-Summary(pl):	Pliki nagЁСwkowe i biblioteki dla t1lib
-Summary(pt_BR):	Arquivos de inclusЦo e bibliotecas para o desenvolvimento com a T1lib
-Summary(ru):	Растеризатор шрифтов Type 1 - файлы для разработки программ
-Summary(uk):	Растеризатор шрифт╕в Type 1 - файли для розробки програм
+Summary(pl.UTF-8):   Pliki nagе┌цЁwkowe i biblioteki dla t1lib
+Summary(pt_BR.UTF-8):   Arquivos de inclusцёo e bibliotecas para o desenvolvimento com a T1lib
+Summary(ru.UTF-8):   п═п╟я│я┌п╣я─п╦п╥п╟я┌п╬я─ я┬я─п╦я└я┌п╬п╡ Type 1 - я└п╟п╧п╩я▀ п╢п╩я▐ я─п╟п╥я─п╟п╠п╬я┌п╨п╦ п©я─п╬пЁя─п╟п╪п╪
+Summary(uk.UTF-8):   п═п╟я│я┌п╣я─п╦п╥п╟я┌п╬я─ я┬я─п╦я└я┌я√п╡ Type 1 - я└п╟п╧п╩п╦ п╢п╩я▐ я─п╬п╥я─п╬п╠п╨п╦ п©я─п╬пЁя─п╟п╪
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	libt1lib1.3.1-devel
@@ -150,51 +150,51 @@ Obsoletes:	libt1lib1.3.1-devel
 %description devel
 The files needed for developing applications using t1lib.
 
-%description devel -l pl
-Pliki niezbЙdne do tworzenia aplikacji z wykorzystaniem t1lib.
+%description devel -l pl.UTF-8
+Pliki niezbд≥dne do tworzenia aplikacji z wykorzystaniem t1lib.
 
-%description devel -l pt_BR
-Arquivos de inclusЦo e bibliotecas para o desenvolvimento de programas
+%description devel -l pt_BR.UTF-8
+Arquivos de inclusцёo e bibliotecas para o desenvolvimento de programas
 t1lib.
 
-%description devel -l ru
-Файлы необходимые для компиляции использующих t1lib пакетов.
+%description devel -l ru.UTF-8
+п╓п╟п╧п╩я▀ п╫п╣п╬п╠я┘п╬п╢п╦п╪я▀п╣ п╢п╩я▐ п╨п╬п╪п©п╦п╩я▐я├п╦п╦ п╦я│п©п╬п╩я▄п╥я┐я▌я┴п╦я┘ t1lib п©п╟п╨п╣я┌п╬п╡.
 
-%description devel -l uk
-Файли потр╕бн╕ для комп╕ляц╕╖ пакет╕в, що використовують t1lib.
+%description devel -l uk.UTF-8
+п╓п╟п╧п╩п╦ п©п╬я┌я─я√п╠п╫я√ п╢п╩я▐ п╨п╬п╪п©я√п╩я▐я├я√я≈ п©п╟п╨п╣я┌я√п╡, я┴п╬ п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐я▌я┌я▄ t1lib.
 
 %package static
 Summary:	Static libraries for t1lib
-Summary(pl):	Biblioteki statyczne dla t1lib
-Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com t1lib
+Summary(pl.UTF-8):   Biblioteki statyczne dla t1lib
+Summary(pt_BR.UTF-8):   Bibliotecas estц║ticas para desenvolvimento com t1lib
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static libraries for t1lib.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteki statyczne dla t1lib.
 
-%description static -l pt_BR
-Bibliotecas estАticas para desenvolvimento com t1lib
+%description static -l pt_BR.UTF-8
+Bibliotecas estц║ticas para desenvolvimento com t1lib
 
-%description static -l ru
-Статическая библиотека для программирования с t1lib.
+%description static -l ru.UTF-8
+п║я┌п╟я┌п╦я┤п╣я│п╨п╟я▐ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╟ п╢п╩я▐ п©я─п╬пЁя─п╟п╪п╪п╦я─п╬п╡п╟п╫п╦я▐ я│ t1lib.
 
-%description static -l uk
-Статична б╕бл╕отека для програмування з t1lib.
+%description static -l uk.UTF-8
+п║я┌п╟я┌п╦я┤п╫п╟ п╠я√п╠п╩я√п╬я┌п╣п╨п╟ п╢п╩я▐ п©я─п╬пЁя─п╟п╪я┐п╡п╟п╫п╫я▐ п╥ t1lib.
 
 %package xglyph
 Summary:	Test program for t1lib with X11 interface
-Summary(pl):	Program testowy dla t1lib z interfejsem X11
+Summary(pl.UTF-8):   Program testowy dla t1lib z interfejsem X11
 Group:		X11/Applications
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description xglyph
 Test program for t1lib with X11 interface.
 
-%description xglyph -l pl
+%description xglyph -l pl.UTF-8
 Program testowy dla t1lib z interfejsem X11.
 
 %prep
