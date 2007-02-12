@@ -3,10 +3,10 @@
 %bcond_without	doc	# do not build documentation with LaTeX
 #
 Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts
-Summary(pl.UTF-8):   Biblioteka znakowych i łańcuchowych glifów z fontów Adobe Type 1
-Summary(pt_BR.UTF-8):   Rasterizador de fontes Type 1
-Summary(ru.UTF-8):   Растеризатор шрифтов Type 1
-Summary(uk.UTF-8):   Растеризатор шрифтів Type 1
+Summary(pl.UTF-8):	Biblioteka znakowych i łańcuchowych glifów z fontów Adobe Type 1
+Summary(pt_BR.UTF-8):	Rasterizador de fontes Type 1
+Summary(ru.UTF-8):	Растеризатор шрифтов Type 1
+Summary(uk.UTF-8):	Растеризатор шрифтів Type 1
 Name:		t1lib
 Version:	5.1.0
 Release:	3
@@ -126,7 +126,7 @@ T1lib - це бібліотека для створенння гліфів си�
 
 %package fonts
 Summary:	Type 1 fonts
-Summary(pl.UTF-8):   Fonty Type 1
+Summary(pl.UTF-8):	Fonty Type 1
 Group:		Fonts
 Requires(post,postun):	fontpostinst >= 0.1-6
 Requires:	%{_fontsdir}/Type1
@@ -139,10 +139,10 @@ Zestaw fontów Type 1.
 
 %package devel
 Summary:	Development files for t1lib
-Summary(pl.UTF-8):   Pliki nagłówkowe i biblioteki dla t1lib
-Summary(pt_BR.UTF-8):   Arquivos de inclusão e bibliotecas para o desenvolvimento com a T1lib
-Summary(ru.UTF-8):   Растеризатор шрифтов Type 1 - файлы для разработки программ
-Summary(uk.UTF-8):   Растеризатор шрифтів Type 1 - файли для розробки програм
+Summary(pl.UTF-8):	Pliki nagłówkowe i biblioteki dla t1lib
+Summary(pt_BR.UTF-8):	Arquivos de inclusão e bibliotecas para o desenvolvimento com a T1lib
+Summary(ru.UTF-8):	Растеризатор шрифтов Type 1 - файлы для разработки программ
+Summary(uk.UTF-8):	Растеризатор шрифтів Type 1 - файли для розробки програм
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	libt1lib1.3.1-devel
@@ -165,8 +165,8 @@ t1lib.
 
 %package static
 Summary:	Static libraries for t1lib
-Summary(pl.UTF-8):   Biblioteki statyczne dla t1lib
-Summary(pt_BR.UTF-8):   Bibliotecas estáticas para desenvolvimento com t1lib
+Summary(pl.UTF-8):	Biblioteki statyczne dla t1lib
+Summary(pt_BR.UTF-8):	Bibliotecas estáticas para desenvolvimento com t1lib
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -187,7 +187,7 @@ Bibliotecas estáticas para desenvolvimento com t1lib
 
 %package xglyph
 Summary:	Test program for t1lib with X11 interface
-Summary(pl.UTF-8):   Program testowy dla t1lib z interfejsem X11
+Summary(pl.UTF-8):	Program testowy dla t1lib z interfejsem X11
 Group:		X11/Applications
 Requires:	%{name}-devel = %{version}-%{release}
 
