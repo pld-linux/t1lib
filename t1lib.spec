@@ -8,24 +8,22 @@ Summary(pt_BR.UTF-8):	Rasterizador de fontes Type 1
 Summary(ru.UTF-8):	Растеризатор шрифтов Type 1
 Summary(uk.UTF-8):	Растеризатор шрифтів Type 1
 Name:		t1lib
-Version:	5.1.0
-Release:	3
+Version:	5.1.1
+Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
-# Source0-md5:	a05bed4aa63637052e60690ccde70421
+# Source0-md5:	b1b86b5014364d92ab3b7cee6c81e29d
 Source1:	%{name}-fonts.Fontmap
 Source2:	%{name}-fonts.fonts.scale
 Source3:	%{name}config
 Source4:	%{name}config.8
-Patch0:		%{name}-DESTDIR.patch
-Patch1:		%{name}-doc.patch
-Patch2:		%{name}-config.patch
-Patch3:		%{name}-KernMapSize.patch
-Patch4:		%{name}-man.patch
-Patch5:		%{name}-xglyph.patch
-Patch6:		%{name}-link.patch
-Patch7:		%{name}-aclocal.patch
+Patch0:		%{name}-doc.patch
+Patch1:		%{name}-config.patch
+Patch2:		%{name}-KernMapSize.patch
+Patch3:		%{name}-man.patch
+Patch4:		%{name}-xglyph.patch
+Patch5:		%{name}-aclocal.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
@@ -199,14 +197,12 @@ Program testowy dla t1lib z interfejsem X11.
 
 %prep
 %setup -q
-%patch0 -p1
+%patch0 -p0
 %patch1 -p0
-%patch2 -p0
+%patch2 -p1
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%patch6 -p1
-%patch7 -p1
 
 rm -f ac-tools/aclocal.m4
 
