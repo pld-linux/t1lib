@@ -8,12 +8,12 @@ Summary(pt_BR.UTF-8):	Rasterizador de fontes Type 1
 Summary(ru.UTF-8):	Растеризатор шрифтов Type 1
 Summary(uk.UTF-8):	Растеризатор шрифтів Type 1
 Name:		t1lib
-Version:	5.1.1
+Version:	5.1.2
 Release:	1
-License:	LGPL
+License:	GPL v2
 Group:		Libraries
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
-# Source0-md5:	b1b86b5014364d92ab3b7cee6c81e29d
+# Source0-md5:	a5629b56b93134377718009df1435f3c
 Source1:	%{name}-fonts.Fontmap
 Source2:	%{name}-fonts.fonts.scale
 Source3:	%{name}config
@@ -24,6 +24,7 @@ Patch2:		%{name}-KernMapSize.patch
 Patch3:		%{name}-man.patch
 Patch4:		%{name}-xglyph.patch
 Patch5:		%{name}-aclocal.patch
+Patch6:		%{name}-link.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
@@ -122,23 +123,10 @@ T1lib - це бібліотека для створенння гліфів си�
 включеного в X11 растеризатора були прибрані. T1lib також включає
 підтримку антиаліасинга.
 
-%package fonts
-Summary:	Type 1 fonts
-Summary(pl.UTF-8):	Fonty Type 1
-Group:		Fonts
-Requires(post,postun):	fontpostinst >= 0.1-6
-Requires:	%{_fontsdir}/Type1
-
-%description fonts
-Type 1 fonts.
-
-%description fonts -l pl.UTF-8
-Zestaw fontów Type 1.
-
 %package devel
 Summary:	Development files for t1lib
-Summary(pl.UTF-8):	Pliki nagłówkowe i biblioteki dla t1lib
-Summary(pt_BR.UTF-8):	Arquivos de inclusão e bibliotecas para o desenvolvimento com a T1lib
+Summary(pl.UTF-8):	Pliki programistyczne t1lib
+Summary(pt_BR.UTF-8):	Arquivos de inclusão para o desenvolvimento com a T1lib
 Summary(ru.UTF-8):	Растеризатор шрифтов Type 1 - файлы для разработки программ
 Summary(uk.UTF-8):	Растеризатор шрифтів Type 1 - файли для розробки програм
 Group:		Development/Libraries
@@ -152,8 +140,7 @@ The files needed for developing applications using t1lib.
 Pliki niezbędne do tworzenia aplikacji z wykorzystaniem t1lib.
 
 %description devel -l pt_BR.UTF-8
-Arquivos de inclusão e bibliotecas para o desenvolvimento de programas
-t1lib.
+Arquivos de inclusão para o desenvolvimento de programas t1lib.
 
 %description devel -l ru.UTF-8
 Файлы необходимые для компиляции использующих t1lib пакетов.
@@ -162,17 +149,17 @@ t1lib.
 Файли потрібні для компіляції пакетів, що використовують t1lib.
 
 %package static
-Summary:	Static libraries for t1lib
-Summary(pl.UTF-8):	Biblioteki statyczne dla t1lib
+Summary:	Static t1lib library
+Summary(pl.UTF-8):	Biblioteka statyczna t1lib
 Summary(pt_BR.UTF-8):	Bibliotecas estáticas para desenvolvimento com t1lib
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
-Static libraries for t1lib.
+Static t1lib library.
 
 %description static -l pl.UTF-8
-Biblioteki statyczne dla t1lib.
+Biblioteka statyczna t1lib.
 
 %description static -l pt_BR.UTF-8
 Bibliotecas estáticas para desenvolvimento com t1lib
@@ -183,11 +170,64 @@ Bibliotecas estáticas para desenvolvimento com t1lib
 %description static -l uk.UTF-8
 Статична бібліотека для програмування з t1lib.
 
+%package x
+Summary:	libt1x library (X11 XImage interface)
+Summary(pl.UTF-8):	Biblioteka libt1x (interfejs X11 XImage)
+Group:		X11/Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description x
+libt1x is a library of functions for generating glyphs with data in
+X11 XImage format.
+
+%description x -l pl.UTF-8
+libt1x to biblioteka funkcjo do generowania glifów z danymi w formacie
+X11 XImage.
+
+%package x-devel
+Summary:	Header file for libt1x library
+Summary(pl.UTF-8):	Plik nagłówkowy biblioteki libt1x
+Group:		X11/Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-x = %{version}-%{release}
+Requires:	xorg-lib-libX11-devel
+
+%description x-devel
+Header file for libt1x library.
+
+%description x-devel -l pl.UTF-8
+Plik nagłówkowy biblioteki libt1x.
+
+%package x-static
+Summary:	Static libt1x library
+Summary(pl.UTF-8):	Statyczna biblioteka libt1x
+Group:		X11/Development/Libraries
+Requires:	%{name}-x-devel = %{version}-%{release}
+
+%description x-static
+Static libt1x library.
+
+%description x-static -l pl.UTF-8
+Statyczna biblioteka libt1x.
+
+%package fonts
+Summary:	Type 1 fonts
+Summary(pl.UTF-8):	Fonty Type 1
+Group:		Fonts
+Requires(post,postun):	fontpostinst >= 0.1-6
+Requires:	%{_fontsdir}/Type1
+
+%description fonts
+Type 1 fonts.
+
+%description fonts -l pl.UTF-8
+Zestaw fontów Type 1.
+
 %package xglyph
 Summary:	Test program for t1lib with X11 interface
 Summary(pl.UTF-8):	Program testowy dla t1lib z interfejsem X11
 Group:		X11/Applications
-Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-x = %{version}-%{release}
 
 %description xglyph
 Test program for t1lib with X11 interface.
@@ -203,6 +243,7 @@ Program testowy dla t1lib z interfejsem X11.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 rm -f ac-tools/aclocal.m4
 
@@ -238,6 +279,9 @@ for sec in 1 5; do
 done
 install %{SOURCE4} $RPM_BUILD_ROOT%{_mandir}/man8
 
+# let autodeps work
+chmod 755 $RPM_BUILD_ROOT%{_libdir}/lib*.so*
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -247,6 +291,9 @@ fontpostinst Type1
 
 %postun -p /sbin/ldconfig
 
+%post	x -p /sbin/ldconfig
+%postun	x -p /sbin/ldconfig
+
 %post fonts
 fontpostinst Type1
 
@@ -255,40 +302,49 @@ fontpostinst Type1
 
 %files
 %defattr(644,root,root,755)
-%doc Changes README.t1*
-%if %{with doc}
-%doc doc/*.dvi
-%endif
-%doc doc/*.{tex,eps,fig}
-
+%doc Changes README.t1* doc/*.{tex,eps,fig} %{?with_doc:doc/*.dvi}
 %attr(755,root,root) %{_bindir}/type1afm
 %attr(755,root,root) %{_bindir}/t1libconfig
-%attr(755,root,root) %{_libdir}/*.so.*.*
-
+%attr(755,root,root) %{_libdir}/libt1.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libt1.so.5
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/enc
-
 %ghost %{_datadir}/%{name}/t1lib.config
 %ghost %{_datadir}/%{name}/FontDatabase
-
-%{_mandir}/man[58]/*
 %{_mandir}/man1/type1afm.1*
+%{_mandir}/man5/FontDatabase.5*
+%{_mandir}/man8/t1libconfig.8*
+
+%files devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libt1.so
+%{_libdir}/libt1.la
+%{_includedir}/t1lib.h
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libt1.a
+
+%files x
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libt1x.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libt1x.so.5
+
+%files x-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libt1x.so
+%{_libdir}/libt1x.la
+%{_includedir}/t1libx.h
+
+%files x-static
+%defattr(644,root,root,755)
+%{_libdir}/libt1x.a
 
 %files fonts
 %defattr(644,root,root,755)
 %{_t1fontsdir}/*.pfb
 %{_t1afmdir}/*.afm
 %{_t1fontsdir}/*.%{name}-fonts
-
-%files devel
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/*.so
-%{_libdir}/*.la
-%{_includedir}/*
-
-%files static
-%defattr(644,root,root,755)
-%{_libdir}/*.a
 
 %files xglyph
 %defattr(644,root,root,755)
