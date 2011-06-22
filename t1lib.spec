@@ -41,6 +41,7 @@ BuildRequires:	tetex-tex-babel
 %endif
 Requires:	findutils
 Requires:	fontpostinst >= 0.1-6
+Requires(post):	/sbin/ldconfig
 Obsoletes:	libt1lib1.3.1
 Obsoletes:	libt1lib1.3.1-progs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -171,6 +172,22 @@ Bibliotecas estáticas para desenvolvimento com t1lib
 
 %description static -l uk.UTF-8
 Статична бібліотека для програмування з t1lib.
+
+%package doc
+Summary:	Manual for t1lib
+Summary(fr.UTF-8):	Documentation pour t1lib
+Summary(it.UTF-8):	Documentazione di t1lib
+Summary(pl.UTF-8):	Podręcznik dla t1lib
+Group:		Documentation
+
+%description doc
+Documentation for t1lib.
+
+%description doc -l fr.UTF-8
+Documentation pour t1lib.
+
+%description doc -l it.UTF-8
+Documentazione di t1lib.
 
 %package x
 Summary:	libt1x library (X11 XImage interface)
@@ -305,7 +322,7 @@ fontpostinst Type1
 
 %files
 %defattr(644,root,root,755)
-%doc Changes README.t1* doc/*.{tex,eps,fig} %{?with_doc:doc/*.dvi}
+%doc Changes README.t1*
 %attr(755,root,root) %{_bindir}/type1afm
 %attr(755,root,root) %{_bindir}/t1libconfig
 %attr(755,root,root) %{_libdir}/libt1.so.*.*.*
@@ -327,6 +344,12 @@ fontpostinst Type1
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libt1.a
+
+%if %{with doc}
+%files doc
+%defattr(644,root,root,755)
+%doc doc/*.{tex,eps,fig} %{?with_doc:doc/*.dvi}
+%endif
 
 %files x
 %defattr(644,root,root,755)
