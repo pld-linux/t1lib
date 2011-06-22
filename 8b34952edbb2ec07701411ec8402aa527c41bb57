@@ -1,0 +1,10 @@
+- updated to 0.9.2
+- changes in header
+- added -q %setup parameter
+- added fonts subpackage
+- moved fonts to /usr/share/fonts/Type1
+- changed GLOBAL_DATA_DIR to /usr/share/t1lib
+- added %post & %postun macros
+- added autoconf on top of %build
+- minor changes in %files and %install
+- added BuildRequires: type1inst >= 0.6.1
