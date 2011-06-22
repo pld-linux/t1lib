@@ -1,7 +1,7 @@
 #
 # Conditional build:
 %bcond_without	doc	# do not build documentation with LaTeX
-#
+
 Summary:	A library for character- and string-glyphs from Adobe Type 1 fonts
 Summary(pl.UTF-8):	Biblioteka znakowych i łańcuchowych glifów z fontów Adobe Type 1
 Summary(pt_BR.UTF-8):	Rasterizador de fontes Type 1
@@ -39,7 +39,7 @@ BuildRequires:	tetex-latex
 BuildRequires:	tetex-makeindex
 BuildRequires:	tetex-tex-babel
 %endif
-Requires(post):	fontpostinst >= 0.1-6
+Requires:	findutils
 Requires:	fontpostinst >= 0.1-6
 Obsoletes:	libt1lib1.3.1
 Obsoletes:	libt1lib1.3.1-progs
@@ -268,19 +268,19 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_datadir},%{_bindir},%{_includedir}} \
 	DESTDIR=$RPM_BUILD_ROOT
 
 cp -a Fonts/enc $RPM_BUILD_ROOT%{_datadir}/%{name}
-install Fonts/afm/*.afm $RPM_BUILD_ROOT%{_t1afmdir}
-install Fonts/type1/*.pfb $RPM_BUILD_ROOT%{_t1fontsdir}
-install %{SOURCE1} $RPM_BUILD_ROOT%{_t1fontsdir}/Fontmap.%{name}-fonts
-install %{SOURCE2} $RPM_BUILD_ROOT%{_t1fontsdir}/fonts.scale.%{name}-fonts
+cp -a Fonts/afm/*.afm $RPM_BUILD_ROOT%{_t1afmdir}
+cp -a Fonts/type1/*.pfb $RPM_BUILD_ROOT%{_t1fontsdir}
+cp -a %{SOURCE1} $RPM_BUILD_ROOT%{_t1fontsdir}/Fontmap.%{name}-fonts
+cp -a %{SOURCE2} $RPM_BUILD_ROOT%{_t1fontsdir}/fonts.scale.%{name}-fonts
 
-install %{SOURCE3} $RPM_BUILD_ROOT%{_bindir}
+install -p %{SOURCE3} $RPM_BUILD_ROOT%{_bindir}
 
 > $RPM_BUILD_ROOT%{_datadir}/%{name}/FontDatabase
 
 for sec in 1 5; do
-	install debian/*.${sec} $RPM_BUILD_ROOT%{_mandir}/man${sec}
+	cp -a debian/*.${sec} $RPM_BUILD_ROOT%{_mandir}/man${sec}
 done
-install %{SOURCE4} $RPM_BUILD_ROOT%{_mandir}/man8
+cp -a %{SOURCE4} $RPM_BUILD_ROOT%{_mandir}/man8
 
 # let autodeps work
 chmod 755 $RPM_BUILD_ROOT%{_libdir}/lib*.so*
