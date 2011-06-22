@@ -29,9 +29,14 @@ Patch7:		%{name}-5.1.2-CVE-2010-2642.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
+BuildRequires:	rpm >= 4.4.9-56
+%if "%{pld_release}" == "ac"
+BuildRequires:	XFree86-devel
+%else
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXaw-devel
 BuildRequires:	xorg-lib-libXt-devel
+%endif
 %if %{with doc}
 BuildRequires:	tetex-dvips
 BuildRequires:	tetex-format-latex
