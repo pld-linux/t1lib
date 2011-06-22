@@ -1,0 +1,58 @@
+diff -Nru T1-1.0.1/lib/Makefile.in T1-1.0.1.new/lib/Makefile.in
+--- T1-1.0.1/lib/Makefile.in	Sun Jan 23 08:03:45 2000
++++ T1-1.0.1.new/lib/Makefile.in	Thu Mar 23 17:40:00 2000
+@@ -158,18 +158,18 @@
+ 
+ 
+ install: dummy
+-	$(MKINSTALLDIRS) $(libdir)
+-	$(MKINSTALLDIRS) $(includedir)
+-	$(MKINSTALLDIRS) @T1LIB_DATA_DIR@
++	$(MKINSTALLDIRS) $(DESTDIR)$(libdir)
++	$(MKINSTALLDIRS) $(DESTDIR)$(includedir)
++	$(MKINSTALLDIRS) $(DESTDIR)@T1LIB_DATA_DIR@
+ 	$(LIBTOOL) --mode=install \
+-		$(INSTALL_DATA) $(MAIN_TARGET) $(libdir)
++		$(INSTALL_DATA) $(MAIN_TARGET) $(DESTDIR)$(libdir)
+ 	$(LIBTOOL) --mode=install \
+-		$(INSTALL_DATA) $(MAIN_HEADER) $(includedir)
+-	if (test -f @T1LIB_DATA_DIR@/t1lib.config) \
++		$(INSTALL_DATA) $(MAIN_HEADER) $(DESTDIR)$(includedir)
++	if (test -f $(DESTDIR)@T1LIB_DATA_DIR@/t1lib.config) \
+ 	then \
+ 	  echo "Alert: Global configuration file exists, installation skipped!"; \
+ 	else \
+-	  $(LIBTOOL) --mode=install $(INSTALL_DATA) t1lib.config @T1LIB_DATA_DIR@; \
++	  $(LIBTOOL) --mode=install $(INSTALL_DATA) t1lib.config $(DESTDIR)@T1LIB_DATA_DIR@; \
+ 	fi;
+ 
+ 
+diff -Nru T1-1.0.1/type1afm/Makefile.in T1-1.0.1.new/type1afm/Makefile.in
+--- T1-1.0.1/type1afm/Makefile.in	Sun Jan 23 08:05:26 2000
++++ T1-1.0.1.new/type1afm/Makefile.in	Thu Mar 23 17:39:10 2000
+@@ -87,9 +87,9 @@
+ 	-rmdir .libs
+ 
+ install: dummy
+-	$(MKINSTALLDIRS) $(bindir)
++	$(MKINSTALLDIRS) $(DESTDIR)$(bindir)
+ 	$(LIBTOOL) --mode=install \
+-		$(INSTALL_PROGRAM) type1afm $(bindir)/type1afm
++		$(INSTALL_PROGRAM) type1afm $(DESTDIR)$(bindir)/type1afm
+ 
+ 
+ uninstall: dummy
+diff -Nru T1-1.0.1/xglyph/Makefile.in T1-1.0.1.new/xglyph/Makefile.in
+--- T1-1.0.1/xglyph/Makefile.in	Sun Jan 23 08:04:36 2000
++++ T1-1.0.1.new/xglyph/Makefile.in	Thu Mar 23 17:38:50 2000
+@@ -94,8 +94,8 @@
+ 
+ 
+ install: dummy
+-	$(MKINSTALLDIRS) $(bindir)
+-	$(LIBTOOL) --mode=install $(INSTALL_PROGRAM) xglyph $(bindir)/xglyph
++	$(MKINSTALLDIRS) $(DESTDIR)$(bindir)
++	$(LIBTOOL) --mode=install $(INSTALL_PROGRAM) xglyph $(DESTDIR)$(bindir)/xglyph
+ 
+ 
+ uninstall: dummy
