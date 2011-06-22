@@ -1,0 +1,3 @@
+- Type1 fonts go to %{_fontsdir}/Type1, metrics to {afm,pfm} subdirs
+- changed post/postun scripts
+  (merge included fontmaps instead of generating broken by type1inst)
