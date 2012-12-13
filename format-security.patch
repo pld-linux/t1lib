@@ -1,0 +1,22 @@
+--- t1lib-5.1.2/lib/type1/objects.h~	2007-12-23 16:49:42.000000000 +0100
++++ t1lib-5.1.2/lib/type1/objects.h	2012-12-13 13:46:42.872059259 +0100
+@@ -214,7 +214,7 @@
+ /*SHARED*/
+ /* NDW: personally, I want to see status and error messages! */
+ #define IfTrace0(condition,model)                                 \
+-        {if (condition) printf(model);}
++        {if (condition) printf("%s",model);}
+ #define IfTrace1(condition,model,arg0)                            \
+         {if (condition) printf(model,arg0);}
+ #define IfTrace2(condition,model,arg0,arg1)                       \
+--- t1lib-5.1.2/lib/t1lib/t1subset.c~	2007-12-23 16:49:42.000000000 +0100
++++ t1lib-5.1.2/lib/t1lib/t1subset.c	2012-12-13 13:47:33.042057487 +0100
+@@ -759,7 +759,7 @@
+ 	     tr_len);
+     T1_PrintLog( "T1_SubsetFont()", err_warn_msg_buf,
+ 		 T1LOG_DEBUG);
+-    l+=sprintf( &(trailerbuf[l]), linebuf); /* contains the PostScript trailer */
++    l+=sprintf( &(trailerbuf[l]), "%s", linebuf); /* contains the PostScript trailer */
+   }
+   
+   /* compute size of output file */
