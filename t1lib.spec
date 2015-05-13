@@ -9,7 +9,7 @@ Summary(ru.UTF-8):	Растеризатор шрифтов Type 1
 Summary(uk.UTF-8):	Растеризатор шрифтів Type 1
 Name:		t1lib
 Version:	5.1.2
-Release:	8
+Release:	9
 License:	GPL v2
 Group:		Libraries
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
@@ -46,7 +46,6 @@ BuildRequires:	tetex-makeindex
 BuildRequires:	tetex-tex-babel
 %endif
 Requires:	findutils
-Requires:	fontpostinst >= 0.1-6
 Requires(post):	/sbin/ldconfig
 Obsoletes:	libt1lib1.3.1
 Obsoletes:	libt1lib1.3.1-progs
@@ -239,6 +238,7 @@ Statyczna biblioteka libt1x.
 Summary:	Type 1 fonts
 Summary(pl.UTF-8):	Fonty Type 1
 Group:		Fonts
+Requires:	fontpostinst >= 0.1-6
 Requires(post,postun):	fontpostinst >= 0.1-6
 Requires:	%{_fontsdir}/Type1
 
@@ -312,10 +312,7 @@ chmod 755 $RPM_BUILD_ROOT%{_libdir}/lib*.so*
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-/sbin/ldconfig
-fontpostinst Type1
-
+%post	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %post	x -p /sbin/ldconfig
