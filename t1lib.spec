@@ -9,7 +9,7 @@ Summary(ru.UTF-8):	Растеризатор шрифтов Type 1
 Summary(uk.UTF-8):	Растеризатор шрифтів Type 1
 Name:		t1lib
 Version:	5.1.2
-Release:	9
+Release:	10
 License:	GPL v2
 Group:		Libraries
 Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
@@ -25,8 +25,10 @@ Patch3:		%{name}-man.patch
 Patch4:		%{name}-xglyph.patch
 Patch5:		%{name}-aclocal.patch
 Patch6:		%{name}-link.patch
-Patch7:		%{name}-5.1.2-CVE-2010-2642.patch
-Patch8:		format-security.patch
+Patch7:		format-security.patch
+Patch8:		t1lib-5.1.2-CVE-2010-2642_2011-0433_2011-5244.patch
+Patch9:		t1lib-5.1.2-CVE-2011-0764.patch
+Patch10:	t1lib-5.1.2-CVE-2011-1552_1553_1554.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
@@ -271,6 +273,8 @@ Program testowy dla t1lib z interfejsem X11.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
+%patch10 -p1
 
 rm -f ac-tools/aclocal.m4
 
