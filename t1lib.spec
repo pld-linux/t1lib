@@ -29,6 +29,7 @@ Patch7:		format-security.patch
 Patch8:		t1lib-5.1.2-CVE-2010-2642_2011-0433_2011-5244.patch
 Patch9:		t1lib-5.1.2-CVE-2011-0764.patch
 Patch10:	t1lib-5.1.2-CVE-2011-1552_1553_1554.patch
+URL:		http://www.t1lib.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
