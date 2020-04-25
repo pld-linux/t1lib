@@ -12,7 +12,7 @@ Version:	5.1.2
 Release:	10
 License:	GPL v2
 Group:		Libraries
-Source0:	ftp://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
+Source0:	http://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
 # Source0-md5:	a5629b56b93134377718009df1435f3c
 Source1:	%{name}-fonts.Fontmap
 Source2:	%{name}-fonts.fonts.scale
