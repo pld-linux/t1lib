@@ -50,8 +50,8 @@ BuildRequires:	tetex-tex-babel
 %endif
 Requires:	findutils
 Requires(post):	/sbin/ldconfig
-Obsoletes:	libt1lib1.3.1
-Obsoletes:	libt1lib1.3.1-progs
+Obsoletes:	libt1lib1.3.1 < 5
+Obsoletes:	libt1lib1.3.1-progs < 5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_t1fontsdir	%{_fontsdir}/Type1
@@ -142,7 +142,7 @@ Summary(ru.UTF-8):	Растеризатор шрифтов Type 1 - файлы �
 Summary(uk.UTF-8):	Растеризатор шрифтів Type 1 - файли для розробки програм
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Obsoletes:	libt1lib1.3.1-devel
+Obsoletes:	libt1lib1.3.1-devel < 5
 
 %description devel
 The files needed for developing applications using t1lib.
