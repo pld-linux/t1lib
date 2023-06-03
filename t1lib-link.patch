@@ -9,7 +9,12 @@
  LDFLAGS   = @LDFLAGS@
  LDLIBS    = @LDLIBS@
  AR        = ar rc
-@@ -137,7 +137,7 @@
+@@ -133,11 +133,11 @@ libt1.la: $(TYPE1_OBJS) $(T1LIB_OBJS)
+ 	cp t1lib/t1lib.h .
+ 
+ 
+-libt1x.la: $(T1LIBX_OBJS)
++libt1x.la: $(T1LIBX_OBJS) libt1.la
  	$(LIBTOOL) --mode=link \
  		$(CC) $(LDFLAGS) -o $@ $(T1LIBX_OBJS) \
  	         -version-info @T1LIB_LT_CURRENT@:@T1LIB_LT_REVISION@:@T1LIB_LT_AGE@ \
