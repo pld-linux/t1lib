@@ -9,7 +9,7 @@ Summary(ru.UTF-8):	Растеризатор шрифтов Type 1
 Summary(uk.UTF-8):	Растеризатор шрифтів Type 1
 Name:		t1lib
 Version:	5.1.2
-Release:	12
+Release:	13
 License:	GPL v2
 Group:		Libraries
 Source0:	http://sunsite.unc.edu/pub/Linux/libs/graphics/%{name}-%{version}.tar.gz
@@ -59,7 +59,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_t1fontsdir	%{_fontsdir}/Type1
 %define		_t1afmdir	%{_t1fontsdir}/afm
 %define		_datadir	/etc
-%define		specflags_ia32	 -fomit-frame-pointer
+%define		_defaultdocdir	%{_prefix}/share/doc
+%define		specflags_ia32	-fomit-frame-pointer
 
 %description
 t1lib is a library distributed under the GNU General Public Library
