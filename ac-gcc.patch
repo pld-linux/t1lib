@@ -1,0 +1,11 @@
+--- t1lib-5.1.2/configure.in.orig	2026-05-14 17:29:47.000000000 +0200
++++ t1lib-5.1.2/configure.in	2026-05-14 21:04:48.326664367 +0200
+@@ -147,7 +147,7 @@
+   unsigned int B = 3;
+   int i;
+   for(i=0; i<B; i++) Array[[i]] = i - 3;
+-  exit( Array[[1]] != -2 );
++  return Array[[1]] != -2;
+ }],
+     ac_cv_c_gcc_strength_bug="no",
+     ac_cv_c_gcc_strength_bug="yes",
